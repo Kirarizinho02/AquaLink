@@ -1,0 +1,14 @@
+@theme {
+  --font-poppins: Poppins, sans-serif;
+  --font-lato: Lato, sans-serif;
+}
+
+h1 { font-size: 3.815rem; font-family: var(--font-poppins); }
+h2 { font-size: 3.052rem; font-family: var(--font-poppins); }
+h3 { font-size: 2.441rem; font-family: var(--font-poppins); }
+h4 { font-size: 1.953rem; font-family: var(--font-poppins); }
+h5 { font-size: 1.563rem; font-family: var(--font-poppins); }
+h6 { font-size: 1.25rem; font-family: var(--font-poppins); }
+p  { font-size: 1rem;    font-family: var(--font-lato); }
+small { font-size: 0.8rem; font-family: var(--font-lato); }
+.xs { font-size: 0.64rem; font-family: var(--font-lato); }
