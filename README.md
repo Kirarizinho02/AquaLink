@@ -1,69 +1,49 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="./src/assets/logo-aqualink-primary.svg" height="200" width="200">
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# AquaLink
 
-Currently, two official plugins are available:
+**Aqua**Link é uma garrafa inteligente conectada via Bluetooth ao seu celular, capaz de monitorar sua ingestão de água em tempo real.  
+O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompanhamento da hidratação simples, moderno e acessível.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
+- Monitoramento em tempo real do consumo de água.  
+- Conexão Bluetooth com aplicativo mobile e web.  
+- Histórico de hidratação diário e semanal.  
+- Lembretes personalizados de hidratação.  
+- Interface intuitiva e responsiva no app.  
 
-## Expanding the ESLint configuration
+## Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Frontend: React + TailwindCSS
+- **React:** Biblioteca JavaScript para construção de interfaces de usuário reativas e componentizadas.
+- **TailwindCSS:** Framework utilitário para estilização rápida e responsiva, facilitando a criação de layouts modernos.
+- **shadcn/ui:** Biblioteca de componentes UI acessíveis, modernos e altamente customizáveis, construída sobre Radix UI e TailwindCSS, acelerando o desenvolvimento de interfaces profissionais.
+- **Motion:** Biblioteca para animações declarativas e interações fluidas em React, permitindo transições suaves e efeitos visuais avançados com sintaxe simples.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Backend: 
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Banco de Dados: Firebase Realtime Database
+- **Firebase Realtime Database:** Banco de dados NoSQL em tempo real, utilizado para armazenar e sincronizar dados de hidratação dos usuários.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Hardware: ESP32 + Sensor Time of Flight
+- **ESP32:** Microcontrolador com conectividade Bluetooth, responsável pela coleta dos dados do sensor e envio ao app.
+
+## Estrutura do Projeto
+```bash
+├── src
+│   ├── assets        # Logos, imagens e ícones
+│   ├── components    # Componentes reutilizáveis
+│   ├── contexts      # Contextos variados
+│   ├── css           # Estilização adicional do projeto
+│   ├── layouts       # Layouts utilizados nas páginas
+│   ├── lib           # Blibliotecas extras
+│   ├── pages         # Páginas principais
+│   └── App.tsx       # Arquivo principal
 ```
+## Integrantes
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Gabriel Carniatto — [@gwerta](https://github.com/gwerta)
+- Samuel Augusto — [@Kirarizinho02](https://github.com/Kirarizinho02)
+- Vitor Eto — [@HidekiEto](https://github.com/HidekiEto)
