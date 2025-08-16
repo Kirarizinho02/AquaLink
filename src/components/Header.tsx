@@ -31,7 +31,7 @@ const navigationLinks = [
 
 const Header = () => {
   return (
-    <header className="px-4 md:px-6 py-5 margin mx-6 border-b bg-white max-w-[1880px] w-full">
+    <header className="px-4 md:px-6 py-5 margin mx-6 border-b max-w-[1880px] w-full">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Coluna esquerda */}
         <div className="flex flex-1 items-center gap-2">
@@ -110,7 +110,7 @@ const Header = () => {
                     >
                       <Icon
                         size={16}
-                        className="text-muted-foreground/85"
+                        className="text-muted-foreground/80"
                         aria-hidden="true"
                       />
                       <span>{link.label}</span>
