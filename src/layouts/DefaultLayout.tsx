@@ -4,8 +4,10 @@ import { Outlet } from "react-router-dom";
 const DefaultLayout = () => {
   return (
     <>
-      <Header />
-      <Outlet />
+    <div className="flex w-full justify-center">
+        <Header />
+        <Outlet />
+        </div>
     </>
   );
 };

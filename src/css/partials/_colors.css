@@ -2,10 +2,30 @@
   --color-white: #F9F9F9;
   --color-black: #0C0C0C;
 
+  --color-azul-preto: oklch(0.2953 0.1095 261.18);
+
   --color-azul-primario: oklch(36.6% 0.166 254.6);
   --color-azul-secundario: oklch(51.2% 0.181 252.9);
   --color-azul-terciario: oklch(56.2% 0.174 244.1);
   --color-azul-quaternario: oklch(81.2% 0.144 217.6);
 
   --color-verde-accent: #27E8A4;
+  --color-verde-azul: #29EBD5;
 }
+
+/* @media (prefers-color-scheme: dark) {
+  @theme {
+    --color-white: #181A1B;
+    --color-black: #F9F9F9;
+
+    --color-azul-preto: oklch(0.1953 0.1095 261.18);
+
+    --color-azul-primario: oklch(26.6% 0.166 254.6);
+    --color-azul-secundario: oklch(31.2% 0.181 252.9);
+    --color-azul-terciario: oklch(36.2% 0.174 244.1);
+    --color-azul-quaternario: oklch(41.2% 0.144 217.6);
+
+    --color-verde-accent: #1CA97C;
+    --color-verde-azul: #1CC7B0;
+  }
+} */

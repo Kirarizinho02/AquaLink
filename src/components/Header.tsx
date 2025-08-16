@@ -1,37 +1,37 @@
-// Importação dos ícones
-import { SparklesIcon } from "lucide-react"
 import { IoWaterOutline } from "react-icons/io5";
 import { AiOutlineTeam } from "react-icons/ai";
 import { FaInfo } from "react-icons/fa6";
 
 // Importação dos componentes do shadcn/ui
-import { Button } from "@/components/ui/button"
+
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 import {
-  logo_no_writing_aqualink_primary
-} from '../assets'
+  logo_aqualink_drop_shadow,
+} from "@/assets";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // Array dos links da Nav
 const navigationLinks = [
   { href: "#", label: "Home", icon: IoWaterOutline, active: true },
   { href: "#", label: "Sobre", icon: AiOutlineTeam },
   { href: "#", label: "Informativos", icon: FaInfo },
-]
+];
 
 const Header = () => {
   return (
-    <header className="px-4 md:px-10 pt-8">
+    <header className="px-4 md:px-6 py-5 margin mx-6 border-b bg-white max-w-[1880px] w-full">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Coluna esquerda */}
         <div className="flex flex-1 items-center gap-2">
@@ -74,7 +74,7 @@ const Header = () => {
               <NavigationMenu className="max-w-none *:w-full ">
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => {
-                    const Icon = link.icon
+                    const Icon = link.icon;
                     return (
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
@@ -90,7 +90,7 @@ const Header = () => {
                           <span>{link.label}</span>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
-                    )
+                    );
                   })}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -100,7 +100,7 @@ const Header = () => {
           <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => {
-                const Icon = link.icon
+                const Icon = link.icon;
                 return (
                   <NavigationMenuItem key={index}>
                     <NavigationMenuLink
@@ -110,13 +110,13 @@ const Header = () => {
                     >
                       <Icon
                         size={16}
-                        className="text-muted-foreground/80"
+                        className="text-muted-foreground/85"
                         aria-hidden="true"
                       />
                       <span>{link.label}</span>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
-                )
+                );
               })}
             </NavigationMenuList>
           </NavigationMenu>
@@ -125,24 +125,32 @@ const Header = () => {
         {/* Coluna central: Logo */}
         <div className="flex items-center">
           <a href="#" className="">
-            <img src={logo_no_writing_aqualink_primary} alt="AquaLink Logo" className="h-12" />
+            <img
+              src={logo_aqualink_drop_shadow}
+              alt="AquaLink Logo"
+              className="max-w-[55px]"
+            />
           </a>
         </div>
 
         {/* Coluna direita: Ações */}
         <div className="flex flex-1 items-center justify-end gap-4">
-          <Button size="sm" className="text-sm sm:aspect-square rounded-xl" variant="azulprimario">
-            <FaInfo
-              className="opacity-60"
-              size={16}
-              aria-hidden="true"
-            />
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <Button
+            size="sm"
+            className="text-sm sm:aspect-square rounded-xl"
+            variant="azulprimario"
+          >
+            <FaInfo className="opacity-60" size={16} aria-hidden="true" />
             <span className="sm:sr-only">About</span>
           </Button>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
 export { Header };

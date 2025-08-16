@@ -1,5 +1,10 @@
 @import './partials/_fonts.css';
-
 @import './partials/_colors.css';
-
 @import './partials/_shadcnui.css';
+@import './partials/_breakpoints.css';
+
+
+@import './pagescss/_landingpage.css';
+
+
+@import './layoutscss/_defaultlayout.css';
