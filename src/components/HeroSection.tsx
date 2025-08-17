@@ -14,9 +14,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import {
   aqualink_garrafa_app,
-  aqualink_mock_sombra,
-  background_extra,
   background_squares,
+  group_square,
 } from "@/assets";
 
 const HeroSection = () => {
@@ -41,7 +40,6 @@ const HeroSection = () => {
         ref={heroRef}
         className="relative min-h-screen w-full overflow-hidden py-8"
       >
-        {/* <img src={background_extra} className="absolute top-2/12 left-1/11 inset-0 object-cover opacity-10" /> */}
         <motion.div
           className="relative z-10 container mx-auto max-w-7xl mt-6 md:mt-0"
           style={{ y: contentY }}
@@ -52,7 +50,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.15 }}
                 transition={{ duration: 1.2 }}
-                className="absolute top-[80px] left-[-40px] -z-10 opacity-12 pointer-events-none select-none ps-14 xl:ps-0"
+                className="absolute top-[80px] left-[-40px] -z-10 mix-blend-multiply pointer-events-none select-none ps-14 xl:ps-0 hidden lg:block"
                 aria-hidden="true"
               />
             <motion.div
@@ -104,7 +102,7 @@ const HeroSection = () => {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },
                 }}
-                className="flex flex-wrap justify-center gap-4 lg:justify-start w-full px-6"
+                className="flex flex-wrap justify-center gap-4 lg:justify-start w-full px-6 items-center"
               >
                 <motion.div
                   transition={{ duration: 0.2 }}
@@ -112,7 +110,7 @@ const HeroSection = () => {
                   whileTap={{ scale: 0.95 }}
                   className="relative"
                 >
-                  <Button className="relative rounded-full hover:bg-gradient-to-r bg-gradient-to-r from-verde-accent/50 to-verde-azul hover:from-verde-accent/40 hover:to-verde-azul/90 text-black">
+                  <Button className="backdrop-blur-2xl cursor-pointer relative rounded-full border-azul-quaternario border-1 hover:bg-gradient-to-r bg-gradient-to-r from-verde-accent/25 to-verde-azul/90 hover:from-verde-accent/30 hover:to-verde-azul/90 text-black w-60 h-12">
                     Garanta o Seu!
                     <Sparkles className="h-4 w-4" />
                   </Button>
@@ -126,7 +124,7 @@ const HeroSection = () => {
                   <div className="bg-background/50 absolute inset-0 -z-10 rounded-full backdrop-blur-sm"></div>
                   <Button
                     variant="outline"
-                    className="border-primary/20 hover:border-primary/30 hover:bg-primary/5 rounded-full backdrop-blur-sm transition-all duration-300"
+                    className="border-primary/20 hover:border-primary/30 hover:bg-primary/5 rounded-full backdrop-blur-sm transition-all duration-300 cursor-pointer w-40 text-black/90 hover:text-black"
                   >
                     Descubra Mais <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -147,10 +145,10 @@ const HeroSection = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                       className="text-foreground relative rounded-full px-4 py-1.5 text-sm font-medium shadow-sm"
                     >
-                      <div className="border-azul-quaternario/40 absolute inset-0 rounded-full border-1 backdrop-blur-md dark:border-white/5"></div>
+                      <div className="border-azul-quaternario/40 absolute inset-0 rounded-full border-1 bg-background/50 dark:border-white/5"></div>
                       <div className="via-azul-primario/30 dark:via-primary/30 absolute bottom-0 left-1/2 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r"></div>
 
-                      <span className="relative z-10">{feature}</span>
+                      <span className="relative z-10 text-foreground/95">{feature}</span>
                     </motion.div>
                   )
                 )}
@@ -171,6 +169,10 @@ const HeroSection = () => {
               animate="visible"
               className="w-full items-center"
             >
+              <img 
+                src={group_square} 
+                className="absolute left-3/5 -z-10 opacity-26 pointer-events-none select-none"
+                />
               <img
                 src={aqualink_garrafa_app}
                 className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl drop-shadow-black"
