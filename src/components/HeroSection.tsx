@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
@@ -19,6 +20,8 @@ import {
 } from "@/assets";
 
 const HeroSection = () => {
+  let navigate = useNavigate();
+
   const heroRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(heroRef, { once: false, amount: 0.3 });
   const controls = useAnimation();
@@ -110,7 +113,12 @@ const HeroSection = () => {
                   whileTap={{ scale: 0.95 }}
                   className="relative"
                 >
-                  <Button className="backdrop-blur-2xl cursor-pointer relative rounded-full border-azul-quaternario border-1 hover:bg-gradient-to-r bg-gradient-to-r from-verde-accent/25 to-verde-azul/90 hover:from-verde-accent/30 hover:to-verde-azul/90 text-black w-60 h-12">
+                  <Button 
+                    className="backdrop-blur-2xl cursor-pointer relative rounded-full border-azul-quaternario border-1 hover:bg-gradient-to-r bg-gradient-to-r from-verde-accent/25 to-verde-azul/90 hover:from-verde-accent/30 hover:to-verde-azul/90 text-black w-60 h-12"
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
                     Garanta o Seu!
                     <Sparkles className="h-4 w-4" />
                   </Button>

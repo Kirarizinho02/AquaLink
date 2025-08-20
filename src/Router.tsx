@@ -4,7 +4,7 @@ import {
 } from "react-router";
 
 // Importação das páginas 
-import { LandingPage } from "./pages";
+import { LandingPage, LoginPage } from "./pages";
 
 // Importação dos layouts
 import { DefaultLayout } from "./layouts";
@@ -17,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         Component: LandingPage,
+      },
+      {
+        path: "/login",
+        Component: LoginPage,
       }
     ],
   },

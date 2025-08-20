@@ -24,7 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // Array dos links da Nav
 const navigationLinks = [
-  { href: "#", label: "Home", icon: IoWaterOutline, active: true },
+  { href: "/", label: "Home", icon: IoWaterOutline, active: true },
   { href: "#", label: "Sobre", icon: AiOutlineTeam },
   { href: "#", label: "Informativos", icon: FaInfo },
 ];
