@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "admin_data": {
+      ".write": "auth !== null && root.child('users').child(auth.uid).child('role').val() === 'admin'",
+      ".read": "auth !== null"
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth !== null && auth.uid === $uid",
+        ".write": "auth !== null && auth.uid === $uid"
+      }
+    },
+    "dados_gerais_usuarios": {
+      ".read": "auth !== null",  
+      ".write": "auth !== null" 
+    },
+    ".read": false,
+    ".write": false
+  }
+}
