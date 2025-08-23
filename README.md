@@ -24,8 +24,11 @@ O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompan
 
 ### Backend: 
 
-### Banco de Dados: Firebase Realtime Database
+### Firebase (Banco de dados, autenticação e deploy)
 - **Firebase Realtime Database:** Banco de dados NoSQL em tempo real, utilizado para armazenar e sincronizar dados de hidratação dos usuários.
+- **Firebase Authentication:** Autenticação de usuários de forma segura, permitindo a integração de contas entre o aplicativo e a página web.
+- **Firebase Hosting:** Permite a integração com o repositório do GitHub para facilitar o processo de CI/CD de forma intuitiva.
+
 
 ### Hardware: ESP32 + Sensor Time of Flight
 - **ESP32:** Microcontrolador com conectividade Bluetooth, responsável pela coleta dos dados do sensor e envio ao app.
@@ -42,6 +45,44 @@ O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompan
 │   ├── pages         # Páginas principais
 │   └── App.tsx       # Arquivo principal
 ```
+
+## Como executar o projeto localmente
+Requisitos
+- Node.js (recomenda-se a mesma versão usada no projeto, v22.11.0)
+- npm (v9+)
+- Git
+
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/Kirarizinho02/AquaLink.git
+    cd IncluMove
+    ```
+    
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
+
+3. Configure as variáveis de ambiente:
+   - As variáveis sensíveis (ex: chaves do Firebase) **não estão no repositório** por segurança.
+   - Para rodar localmente, crie um arquivo `.env` na raiz do projeto, para isso, foi disponibilizado o seguinte comando:
+  
+     ```bash
+      npm run make-env-example
+     ```
+   - Ele criará um arquivo `.env` com placeholders no lugar das variáveis. Então, preencha os valores reais das variáveis (peça a algum responsável pelo projeto ou consulte o painel do Firebase).
+    
+4. Inicie o programa:
+    ```bash
+    npm run dev
+    ```
+    
+5. Abra o aplicativo em: [localhost](http://localhost:3000/)
+
+## Links
+
+### Deploy: [Firebase](https://aqualink-tcc.web.app)
+
 ## Integrantes
 
 - Gabriel Carniatto — [@gwerta](https://github.com/gwerta)
