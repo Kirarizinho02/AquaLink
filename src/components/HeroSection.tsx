@@ -20,7 +20,7 @@ import {
 } from "@/assets";
 
 const HeroSection = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const heroRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(heroRef, { once: false, amount: 0.3 });

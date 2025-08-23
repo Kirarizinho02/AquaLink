@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "make-env-example": "node src/scripts/create-env-example.js",
     "dev": "vite --port 3000",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
