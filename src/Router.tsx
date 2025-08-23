@@ -18,10 +18,11 @@ export const router = createBrowserRouter([
         path: "/",
         Component: LandingPage,
       },
-      {
-        path: "/login",
-        Component: LoginPage,
-      }
+      
     ],
+  },
+  {
+    path: "/login",
+    Component: LoginPage,
   },
 ]);
