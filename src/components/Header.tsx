@@ -17,8 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import {
-  logo_aqualink_drop_shadow,
+import {    
   logo_no_writing_aqualink_primary,
 } from "@/assets";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
