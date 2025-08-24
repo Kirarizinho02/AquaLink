@@ -1,0 +1,26 @@
+@keyframes blob {
+  0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+  20% { transform: scale(1.15) translate(30px, -20px) rotate(8deg); }
+  40% { transform: scale(0.95) translate(-25px, 15px) rotate(-6deg); }
+  60% { transform: scale(1.1) translate(10px, 25px) rotate(12deg); }
+  80% { transform: scale(1.05) translate(-20px, -10px) rotate(-8deg); }
+}
+@keyframes blob2 {
+  0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+  50% { transform: scale(1.2) translate(20px, 20px) rotate(10deg); }
+}
+@keyframes blob3 {
+  0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg);}
+  30% { transform: scale(1.1) translate(-15px, 25px) rotate(-12deg);}
+  70% { transform: scale(0.9) translate(25px, -15px) rotate(6deg);}
+}
+
+.animate-blob {
+  animation: blob 10s ease-in-out infinite;
+}
+.animate-blob2 {
+  animation: blob2 12s ease-in-out infinite;
+}
+.animate-blob3 {
+  animation: blob3 14s ease-in-out infinite;
+}

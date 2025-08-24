@@ -19,6 +19,7 @@ import {
 
 import {
   logo_aqualink_drop_shadow,
+  logo_no_writing_aqualink_primary,
 } from "@/assets";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
@@ -126,9 +127,9 @@ const Header = () => {
         <div className="flex items-center">
           <a href="#" className="">
             <img
-              src={logo_aqualink_drop_shadow}
+              src={logo_no_writing_aqualink_primary}
               alt="AquaLink Logo"
-              className="max-w-[55px]"
+              className="max-w-[55px] drop-shadow-gray-500 drop-shadow-sm"
             />
           </a>
         </div>

@@ -11,7 +11,6 @@ type AppContextProviderProps = {
 export const AppContextProvider = (props: AppContextProviderProps) => {
     return (
         <appContext.Provider value={{}}>
-            {/* Componentes futuros*/}
             { props.children }
         </appContext.Provider>
     );

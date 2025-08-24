@@ -9,6 +9,8 @@ import aqualink_mock_sombra from '@/assets/aqualink-mock-sombra.svg';
 import background_extra from '@/assets/background-noise.svg';
 import background_squares from '@/assets/background-squares.svg';
 import group_square from '@/assets/group-square.svg';
+import aqualink3d from '@/assets/aqualink3d.png';
+import aqualink_3d_leftfacing from '@/assets/aqualink-3d-leftfacing.png';
 
 export { 
   logo_no_writing_aqualink_primary, 
@@ -21,5 +23,7 @@ export {
   aqualink_mock_sombra,
   background_extra,
   background_squares,
-  group_square
+  group_square,
+  aqualink3d,
+  aqualink_3d_leftfacing
 };

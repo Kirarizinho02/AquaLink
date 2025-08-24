@@ -5,6 +5,11 @@
 
 
 @import './pagescss/_landingpage.css';
-
+@import './pagescss/_loginpage.css';
 
 @import './layoutscss/_defaultlayout.css';
+
+.watermark {
+  opacity: 0;
+  pointer-events: none;
+}
