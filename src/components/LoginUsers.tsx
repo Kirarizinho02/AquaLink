@@ -124,14 +124,14 @@ const LoginUsers = () => {
         </div>
         <div className="grid grid-cols-2 gap-x-3 w-90">
           <button
-            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2"
+            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2 h-10"
             onClick={handleGoogleLogin}
           >
             <FaGoogle />
             <p>Google</p>
           </button>
           <button
-            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2"
+            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2 h-10"
             onClick={handleGithubLogin}
           >
             <FaGithub />
