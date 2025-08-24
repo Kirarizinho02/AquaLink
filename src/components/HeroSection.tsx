@@ -135,6 +135,12 @@ const HeroSection = () => {
                   className="relative"
                 >
                   <div className="bg-background/50 absolute inset-0 -z-10 rounded-full backdrop-blur-sm"></div>
+                  <Button
+                    variant="outline"
+                    className="border-black/20 hover:border-black/30 hover:bg-primary/5 rounded-full backdrop-blur-sm transition-all duration-300 cursor-pointer w-40 text-black/90 hover:text-black dark:border-white/20 dark:hover:border-white/30 dark:text-white/90 dark:hover:text-white"
+                  >
+                    Descubra Mais <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </motion.div>
               </motion.div>
 
