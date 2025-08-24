@@ -2,6 +2,7 @@
 @import './partials/_colors.css';
 @import './partials/_shadcnui.css';
 @import './partials/_breakpoints.css';
+@import './partials/_properties.css';
 
 
 @import './pagescss/_landingpage.css';
@@ -9,7 +10,3 @@
 
 @import './layoutscss/_defaultlayout.css';
 
-.watermark {
-  opacity: 0;
-  pointer-events: none;
-}

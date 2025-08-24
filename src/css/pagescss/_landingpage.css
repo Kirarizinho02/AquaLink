@@ -3,7 +3,40 @@
 }
 
 @keyframes floatingY {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.button-border::after, .button-border::before {
+  content: '';
+  position: absolute;
+  height: 109.5%;
+  width: 102.5%;
+  background-image: conic-gradient(from var(--angle), var(--color-azul-quaternario), var(--color-verde-accent), var(--color-verde-azul), var(--color-azul-quaternario));
+  z-index: -10;
+  animation: 3s border-spin linear infinite;
+
+  @apply rounded-full;
+}
+
+.button-border::before {
+  filter: blur(5px);
+  opacity: 0.5;
+}
+
+@keyframes border-spin {
+  from{
+    --angle: 0deg;  
+  }
+  to {
+    --angle: 360deg;
+  }
 }

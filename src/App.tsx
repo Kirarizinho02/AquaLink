@@ -1,7 +1,6 @@
-import { AppContextProvider } from "./contexts"
+import { AppContextProvider, AuthProvider, ThemeProvider } from "./contexts"
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router";
-import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
 
@@ -9,7 +8,9 @@ function App() {
     <>
       <AppContextProvider>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <ThemeProvider>
+            <RouterProvider router={router} />
+          </ThemeProvider>
         </AuthProvider> 
       </AppContextProvider>
     </>

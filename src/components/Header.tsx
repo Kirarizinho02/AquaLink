@@ -21,6 +21,7 @@ import {
   logo_no_writing_aqualink_primary,
 } from "@/assets";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ThemeSwitcher } from "./ui/kibo-ui/theme-switcher";
 
 // Array dos links da Nav
 const navigationLinks = [
@@ -92,6 +93,14 @@ const Header = () => {
                       </NavigationMenuItem>
                     );
                   })}
+                  <NavigationMenuItem>
+          <hr className="w-34 h-px my-1 bg-gray-200 border-0 dark:bg-gray-800" />
+                  </NavigationMenuItem>
+                  <NavigationMenuItem className="mx-auto w-full">
+                    <NavigationMenuLink>
+                      <ThemeSwitcher defaultValue="system" onChange={console.log} className="flex justify-evenly content-evenly"/>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </PopoverContent>
@@ -135,18 +144,11 @@ const Header = () => {
 
         {/* Coluna direita: Ações */}
         <div className="flex flex-1 items-center justify-end gap-4">
+            <ThemeSwitcher defaultValue="system" onChange={console.log} className="hidden md:flex" />
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <Button
-            size="sm"
-            className="text-sm sm:aspect-square rounded-xl"
-            variant="azulprimario"
-          >
-            <FaInfo className="opacity-60" size={16} aria-hidden="true" />
-            <span className="sm:sr-only">About</span>
-          </Button>
         </div>
       </div>
     </header>

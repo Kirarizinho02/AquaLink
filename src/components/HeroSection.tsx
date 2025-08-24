@@ -19,12 +19,17 @@ import {
   group_square,
 } from "@/assets";
 
+import { UseThemeContext } from "@/hooks";
+
 const HeroSection = () => {
+  const { theme } = UseThemeContext();
+
   const navigate = useNavigate();
+  
+  const controls = useAnimation();
 
   const heroRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(heroRef, { once: false, amount: 0.3 });
-  const controls = useAnimation();
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -48,14 +53,14 @@ const HeroSection = () => {
           style={{ y: contentY }}
         >
           <div className="grid items-center lg:gap-6 xl:gap-28 md:grid-cols-2 xs:grid-cols-1">
-              <motion.img
-                src={background_squares}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.15 }}
-                transition={{ duration: 1.2 }}
-                className="absolute top-[80px] left-[-40px] -z-10 mix-blend-multiply pointer-events-none select-none ps-14 xl:ps-0 hidden lg:block"
-                aria-hidden="true"
-              />
+            <motion.img
+              src={background_squares}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: theme === "dark" ? 0.36 : 0.16 }}
+              transition={{ duration: 1.2 }}
+              className="absolute top-[80px] left-[-40px] -z-10 mix-blend-multiply pointer-events-none select-none ps-14 xl:ps-0 hidden lg:block"
+              aria-hidden="true"
+            />
             <motion.div
               variants={{
                 hidden: { opacity: 0, x: -50 },
@@ -111,10 +116,10 @@ const HeroSection = () => {
                   transition={{ duration: 0.2 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative"
+                  className="relative "
                 >
-                  <Button 
-                    className="backdrop-blur-2xl cursor-pointer relative rounded-full border-azul-quaternario border-1 hover:bg-gradient-to-r bg-gradient-to-r from-verde-accent/25 to-verde-azul/90 hover:from-verde-accent/30 hover:to-verde-azul/90 text-black w-60 h-12"
+                  <Button
+                    className="button-border cursor-pointer relative rounded-full bg-gradient-to-r from-verde-accent/100 to-verde-azul/100 text-black w-50  transition-colors duration-200"
                     onClick={() => {
                       navigate("/login");
                     }}
@@ -130,12 +135,6 @@ const HeroSection = () => {
                   className="relative"
                 >
                   <div className="bg-background/50 absolute inset-0 -z-10 rounded-full backdrop-blur-sm"></div>
-                  <Button
-                    variant="outline"
-                    className="border-primary/20 hover:border-primary/30 hover:bg-primary/5 rounded-full backdrop-blur-sm transition-all duration-300 cursor-pointer w-40 text-black/90 hover:text-black"
-                  >
-                    Descubra Mais <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
                 </motion.div>
               </motion.div>
 
@@ -153,10 +152,12 @@ const HeroSection = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                       className="text-foreground relative rounded-full px-4 py-1.5 text-sm font-medium shadow-sm"
                     >
-                      <div className="border-azul-quaternario/40 absolute inset-0 rounded-full border-1 bg-background/50 dark:border-white/5"></div>
-                      <div className="via-azul-primario/30 dark:via-primary/30 absolute bottom-0 left-1/2 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r"></div>
+                      <div className="border-azul-quaternario/40 absolute inset-0 rounded-full border-1 bg-background/50"></div>
+                      <div className="via-azul-primario/30 dark:via-white/30 absolute bottom-0 left-1/2 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r"></div>
 
-                      <span className="relative z-10 text-foreground/95">{feature}</span>
+                      <span className="relative z-10 text-foreground/95 font-medium">
+                        {feature}
+                      </span>
                     </motion.div>
                   )
                 )}
@@ -177,13 +178,13 @@ const HeroSection = () => {
               animate="visible"
               className="w-full items-center"
             >
-              <img 
-                src={group_square} 
+              <img
+                src={group_square}
                 className="absolute left-3/5 -z-10 opacity-26 pointer-events-none select-none"
-                />
+              />
               <img
                 src={aqualink_garrafa_app}
-                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl drop-shadow-black"
+                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl drop-shadow-azul-preto"
               />
             </motion.div>
           </div>

@@ -7,6 +7,7 @@ import { logo_no_writing_aqualink_primary } from "@/assets";
 
 import { UseAuthContext } from "@/hooks/UseAuthContext";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const LoginUsers = () => {
   const navigation = useNavigate();
@@ -72,11 +73,13 @@ const LoginUsers = () => {
   return (
     <div className="relative min-h-[calc(100vh)] w-full overflow-hidden items-center content-center max-h-200">
       <div className="w-full space-y-4 text-center content-center flex items-center justify-center flex-col">
+        <a onClick={() => navigation("/")} className="cursor-pointer">
         <img
           src={logo_no_writing_aqualink_primary}
           alt="AquaLink Logo"
-          className="max-w-[55px] mb-4 drop-shadow-verde-azul drop-shadow-md"
+          className="max-w-[55px] drop-shadow-verde-azul dark:drop-shadow-azul-primario drop-shadow-md"
         />
+        </a>
         <h1 className="text-4xl font-bold">Login</h1>
         <p className="text-muted-foreground">
           Faça login para acessar sua conta AquaLink
@@ -87,7 +90,7 @@ const LoginUsers = () => {
             <Input
               type="email"
               placeholder="Email"
-              className="bg-white"
+              className="bg-white dark:bg-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -98,46 +101,48 @@ const LoginUsers = () => {
             <Input
               type="password"
               placeholder="Senha"
-              className="bg-white"
+              className="bg-white dark:bg-black"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           <div className="relative mt-8">
-            <button
+            <Button
               type="submit"
-              className="w-full bg-azul-primario text-white py-2 rounded-lg hover:bg-azul-primario/80 transition duration-300 shadow-md cursor-pointer"
+              className="w-full bg-azul-primario py-2 rounded-lg hover:bg-azul-primario/80 transition duration-300 shadow-sm cursor-pointer dark:shadow-azul-secundario text-white"
             >
               Entrar
-            </button>
+            </Button>
           </div>
         </form>
         <div className="inline-flex items-center justify-center w-full">
-          <hr className="w-90 h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-          <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
+          <hr className="w-90 h-px my-4 bg-gray-200 border-0 dark:bg-gray-800" />
+          <span className="absolute px-3 font-medium text-black -translate-x-1/2 left-1/2 dark:text-white dark:bg-primary bg-absolute-white rounded-2xl">
             Ou continue com
           </span>
         </div>
         <div className="grid grid-cols-2 gap-x-3 w-90">
           <button
-            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-white cursor-pointer"
-            onClick={handleGithubLogin}
-          >
-            <FaGithub />
-          </button>
-          <button
-            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-white cursor-pointer"
+            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2"
             onClick={handleGoogleLogin}
           >
             <FaGoogle />
+            <p>Google</p>
+          </button>
+          <button
+            className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2"
+            onClick={handleGithubLogin}
+          >
+            <FaGithub />
+            <p>GitHub</p>
           </button>
         </div>
         <p className="text-sm text-muted-foreground mt-6">
           Não tem uma conta?{" "}
           <a
             href="/register"
-            className="underline underline-offset-4 hover:text-azul-primario transition-all duration-200"
+            className="underline underline-offset-4 hover:text-azul-primario dark:hover:text-azul-quaternario transition-all duration-200"
           >
             Registre-se
           </a>

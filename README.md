@@ -22,9 +22,7 @@ O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompan
 - **shadcn/ui:** Biblioteca de componentes UI acessíveis, modernos e altamente customizáveis, construída sobre Radix UI e TailwindCSS, acelerando o desenvolvimento de interfaces profissionais.
 - **Motion:** Biblioteca para animações declarativas e interações fluidas em React, permitindo transições suaves e efeitos visuais avançados com sintaxe simples.
 
-### Backend: 
-
-### Firebase (Banco de dados, autenticação e deploy)
+### Backend: Firebase (Banco de dados, autenticação e deploy)
 - **Firebase Realtime Database:** Banco de dados NoSQL em tempo real, utilizado para armazenar e sincronizar dados de hidratação dos usuários.
 - **Firebase Authentication:** Autenticação de usuários de forma segura, permitindo a integração de contas entre o aplicativo e a página web.
 - **Firebase Hosting:** Permite a integração com o repositório do GitHub para facilitar o processo de CI/CD de forma intuitiva.
