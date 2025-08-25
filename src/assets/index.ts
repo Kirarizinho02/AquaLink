@@ -13,6 +13,8 @@ import aqualink3d from '@/assets/aqualink3d.png';
 import aqualink_3d_leftfacing from '@/assets/aqualink-3d-leftfacing.png';
 import aqualink_3d_ver2 from '@/assets/aqualink-3d-ver2.png';
 import aqualink_3d_ver2_br from '@/assets/aqualink-3d-ver2-br.png';
+import aqualink_horizontal from '@/assets/aqualink-horizontal.svg';
+import aqualink_writing_2 from '@/assets/aqualink-writing-2.svg';
 
 export { 
   logo_no_writing_aqualink_primary, 
@@ -29,5 +31,7 @@ export {
   aqualink3d,
   aqualink_3d_leftfacing,
   aqualink_3d_ver2,
-  aqualink_3d_ver2_br
+  aqualink_3d_ver2_br,
+  aqualink_horizontal,
+  aqualink_writing_2
 };

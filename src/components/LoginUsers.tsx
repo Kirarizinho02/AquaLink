@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
 
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 import { logo_no_writing_aqualink_primary } from "@/assets";
 
 import { UseAuthContext } from "@/hooks/UseAuthContext";
 import { useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
+import { sendPasswordResetEmail, getAuth } from "firebase/auth";
 
 const LoginUsers = () => {
+  const id = useId();
   const navigation = useNavigate();
   const { login, loginWithGoogle, loginWithGithub } = UseAuthContext();
 
@@ -70,15 +74,30 @@ const LoginUsers = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Por favor, insira seu email para redefinir a senha.");
+      return;
+    }
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      alert("Email de redefinição de senha enviado!");
+    } catch (error) {
+      console.error("Erro ao enviar email de redefinição de senha:", error);
+      alert("Erro ao enviar email de redefinição de senha.");
+    }
+  };
+
   return (
     <div className="relative min-h-[calc(100vh)] w-full overflow-hidden items-center content-center max-h-200">
       <div className="w-full space-y-4 text-center content-center flex items-center justify-center flex-col">
         <a onClick={() => navigation("/")} className="cursor-pointer">
-        <img
-          src={logo_no_writing_aqualink_primary}
-          alt="AquaLink Logo"
-          className="max-w-[55px] drop-shadow-verde-azul dark:drop-shadow-azul-primario drop-shadow-md"
-        />
+          <img
+            src={logo_no_writing_aqualink_primary}
+            alt="AquaLink Logo"
+            className="max-w-[55px] drop-shadow-verde-azul dark:drop-shadow-azul-primario drop-shadow-md"
+          />
         </a>
         <h1 className="text-4xl font-bold">Login</h1>
         <p className="text-muted-foreground">
@@ -97,7 +116,6 @@ const LoginUsers = () => {
             />
           </div>
           <div className="text-start">
-            <label className="font-medium">Senha</label>
             <Input
               type="password"
               placeholder="Senha"
@@ -107,7 +125,19 @@ const LoginUsers = () => {
               required
             />
           </div>
-          <div className="relative mt-8">
+          <div className="inline-flex justify-between w-90">
+            <div className="inline-flex items-center gap-2">
+              <Checkbox id={id} />
+              <Label htmlFor={id}>Lembrar de mim</Label>
+            </div>
+            <p
+              className="text-muted-foreground cursor-pointer hover:text-azul-quaternario transition-all duration-200 text-sm"
+              onClick={handleForgotPassword}
+            >
+              Esqueceu a senha?
+            </p>
+          </div>
+          <div className="relative mt-4">
             <Button
               type="submit"
               className="w-full bg-azul-primario py-2 rounded-lg hover:bg-azul-primario/80 transition duration-300 shadow-sm cursor-pointer dark:shadow-azul-secundario text-white"

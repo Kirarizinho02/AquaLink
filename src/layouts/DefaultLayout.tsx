@@ -1,4 +1,5 @@
 import { Header } from "@/components";
+import { Footer } from "@/components/Footer";
 import { Outlet } from "react-router-dom";
 
 const DefaultLayout = () => {
@@ -11,6 +12,7 @@ const DefaultLayout = () => {
       [background-size:16px_16px] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_60%,transparent_100%)] lg:[mask-image:radial-gradient(ellipse_90%_60%_at_50%_50%,#000_80%,transparent_100%)]">
         <Outlet />
       </div>
+      <Footer />
     </>
   );
 };

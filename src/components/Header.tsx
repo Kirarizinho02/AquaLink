@@ -137,7 +137,7 @@ const Header = () => {
             <img
               src={logo_no_writing_aqualink_primary}
               alt="AquaLink Logo"
-              className="max-w-[55px] drop-shadow-gray-500 drop-shadow-sm"
+              className="max-w-[44px] drop-shadow-gray-500 drop-shadow-sm"
             />
           </a>
         </div>
