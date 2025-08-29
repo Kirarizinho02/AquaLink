@@ -1,15 +1,13 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
-const config: JestConfigWithTsJest = {
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
-  preset: 'ts-jest/presets/default-esm',
-  testPathIgnorePatterns: ['/node_modules/'],
-  transform: {},
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
+import { createJsWithTsPreset, type JestConfigWithTsJest } from 'ts-jest'
+
+const presetConfig = createJsWithTsPreset({
+  "transform": {
+    "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
   },
-  testEnvironment: 'node'
+})
+
+const jestConfig: JestConfigWithTsJest = {
+  ...presetConfig,
 }
 
-export default config
+export default jestConfig
