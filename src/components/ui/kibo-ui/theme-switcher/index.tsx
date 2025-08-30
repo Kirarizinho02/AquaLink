@@ -1,10 +1,10 @@
 "use client";
-import { UseThemeContext } from "@/hooks/UseThemeContext";
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useThemeContext } from "@/hooks";
 
 const themes = [
   {
@@ -32,7 +32,7 @@ export type ThemeSwitcherProps = {
 };
 
 export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
-  const { theme, setTheme } = UseThemeContext();
+  const { theme, setTheme } = useThemeContext();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
