@@ -11,14 +11,13 @@
   "compilerOptions": {
     "jsx": "react",
     "isolatedModules": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ESNext",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   }
 }

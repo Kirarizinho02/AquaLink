@@ -8,14 +8,14 @@ import { Label } from "@/components/ui/label";
 
 import { logo_no_writing_aqualink_primary } from "@/assets";
 
-import { UseAuthContext } from "@/hooks/UseAuthContext";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail, getAuth } from "firebase/auth";
+import { useAuthContext } from "@/hooks";
 
 const LoginUsers = () => {
   const id = useId();
   const navigation = useNavigate();
-  const { login, loginWithGoogle, loginWithGithub } = UseAuthContext();
+  const { login, loginWithGoogle, loginWithGithub } = useAuthContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -154,6 +154,7 @@ const LoginUsers = () => {
         </div>
         <div className="grid grid-cols-2 gap-x-3 w-90">
           <button
+            name="google"
             className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2 h-10"
             onClick={handleGoogleLogin}
           >
@@ -161,6 +162,7 @@ const LoginUsers = () => {
             <p>Google</p>
           </button>
           <button
+            name="github"
             className="hover:bg-secondary active:bg-secondary/40 flex items-center justify-center rounded-lg border py-2.5 duration-150 bg-primary cursor-pointer gap-2 h-10"
             onClick={handleGithubLogin}
           >
