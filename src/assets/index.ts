@@ -1,36 +1,18 @@
 import logo_no_writing_aqualink_primary from '@/assets/logo-no-writing-aqualink-primary.svg';
-import aqualink_mock_venn from '@/assets/aqualink-mock-venn.svg';
 import logo_aqualink_drop_shadow from '@/assets/logo-aqualink-drop-shadow.svg';
 import aqualink_garrafa_app from '@/assets/aqualink-mock-garrafa-app.svg';
-import venn from '@/assets/venn.svg';
-import aqualink_mock_teste from '@/assets/aqualink-teste.png';
-import teste from '@/assets/teste.png';
-import aqualink_mock_sombra from '@/assets/aqualink-mock-sombra.svg';
-import background_extra from '@/assets/background-noise.svg';
 import background_squares from '@/assets/background-squares.svg';
 import group_square from '@/assets/group-square.svg';
-import aqualink3d from '@/assets/aqualink3d.png';
-import aqualink_3d_leftfacing from '@/assets/aqualink-3d-leftfacing.png';
-import aqualink_3d_ver2 from '@/assets/aqualink-3d-ver2.png';
 import aqualink_3d_ver2_br from '@/assets/aqualink-3d-ver2-br.png';
 import aqualink_horizontal from '@/assets/aqualink-horizontal.svg';
 import aqualink_writing_2 from '@/assets/aqualink-writing-2.svg';
 
 export { 
   logo_no_writing_aqualink_primary, 
-  aqualink_mock_venn,
   logo_aqualink_drop_shadow,
-  venn,
   aqualink_garrafa_app,
-  aqualink_mock_teste,
-  teste,
-  aqualink_mock_sombra,
-  background_extra,
   background_squares,
   group_square,
-  aqualink3d,
-  aqualink_3d_leftfacing,
-  aqualink_3d_ver2,
   aqualink_3d_ver2_br,
   aqualink_horizontal,
   aqualink_writing_2
