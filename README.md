@@ -4,7 +4,7 @@
 
 # AquaLink
 
-**Aqua**Link é uma garrafa inteligente conectada via Bluetooth ao seu celular, capaz de monitorar sua ingestão de água em tempo real.  
+AquaLink é uma garrafa inteligente conectada via Bluetooth ao seu celular, capaz de monitorar sua ingestão de água em tempo real.  
 O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompanhamento da hidratação simples, moderno e acessível.
 
 ## Funcionalidades
@@ -45,7 +45,7 @@ O objetivo do projeto é incentivar hábitos mais saudáveis, tornando o acompan
 ```
 
 ## Como executar o projeto localmente
-Requisitos
+Requisitos:
 - Node.js (recomenda-se a mesma versão usada no projeto, v22.11.0)
 - npm (v9+)
 - Git
@@ -68,7 +68,8 @@ Requisitos
      ```bash
       npm run make-env-example
      ```
-   - Ele criará um arquivo `.env` com placeholders no lugar das variáveis. Então, preencha os valores reais das variáveis (peça a algum responsável pelo projeto ou consulte o painel do Firebase).
+   - Ele criará um arquivo `.env` com placeholders no lugar das variáveis. Então, preencha os valores reais das variáveis (peça a algum responsável pelo projeto ou consulte o painel do Firebase) ou mantenha os placeholders.
+   - O arquivo também é necessário para a configuração correta do ambiente de testes.
     
 4. Inicie o programa:
     ```bash
@@ -77,9 +78,32 @@ Requisitos
     
 5. Abra o aplicativo em: [localhost](http://localhost:3000/)
 
+## Como rodar os testes
+1. Instale as dependências (caso ainda não tenha feito):
+
+    ```bash
+    npm install
+    ```
+
+2. Execute os testes com o comando:
+
+    ```bash
+    npm test
+    ```
+
+3. Os testes estão localizados na pasta `src/tests`.
+
+### Observações
+
+- O ambiente de testes já está configurado para simular o DOM via **jsdom**.
+- Mocks para APIs do navegador, como `ResizeObserver`, já estão incluídos no arquivo de setup (`src/tests/setup.ts`).
+- Para criar novos testes, utilize os utilitários do `@testing-library/react` e os matchers do `@testing-library/jest-dom/vitest`.
+
 ## Links
 
 ### Deploy: [Firebase](https://aqualink-tcc.web.app)
+- Aplicativo móvel (repositório): [App](https://github.com/HidekiEto/TCC)
+- Tecnologia embarcada (repositório): [Sistemas Embarcados](https://github.com/gwerta/Aqualink_Embarcados)
 
 ## Integrantes
 
