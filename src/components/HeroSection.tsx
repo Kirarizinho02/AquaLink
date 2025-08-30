@@ -19,10 +19,10 @@ import {
   group_square,
 } from "@/assets";
 
-import { UseThemeContext } from "@/hooks";
+import { useThemeContext } from "@/hooks";
 
 const HeroSection = () => {
-  const { theme } = UseThemeContext();
+  const { theme } = useThemeContext();
 
   const navigate = useNavigate();
   
@@ -190,7 +190,7 @@ const HeroSection = () => {
               />
               <img
                 src={aqualink_garrafa_app}
-                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl drop-shadow-azul-preto"
+                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl dark:drop-shadow-absolute-white/15 drop-shadow-absolute-black/75"
               />
             </motion.div>
           </div>
