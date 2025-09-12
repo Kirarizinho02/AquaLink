@@ -52,7 +52,7 @@ const HeroSection = () => {
           className="relative z-10 container mx-auto max-w-7xl mt-6 md:mt-0"
           style={{ y: contentY }}
         >
-          <div className="grid items-center lg:gap-6 xl:gap-28 md:grid-cols-2 xs:grid-cols-1">
+          <div className="grid items-center ms-0 lg:ms-8 mt-2 lg:gap-6 xl:gap-28 md:grid-cols-2 xs:grid-cols-1">
             <motion.img
               src={background_squares}
               initial={{ opacity: 0 }}
@@ -121,7 +121,7 @@ const HeroSection = () => {
                   <Button
                     className="button-border cursor-pointer relative rounded-full bg-gradient-to-r from-verde-accent/100 to-verde-azul/100 text-black w-50  transition-colors duration-200"
                     onClick={() => {
-                      navigate("/login");
+                      navigate("/register");
                     }}
                   >
                     Garanta o Seu!
@@ -190,7 +190,7 @@ const HeroSection = () => {
               />
               <img
                 src={aqualink_garrafa_app}
-                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl dark:drop-shadow-absolute-white/15 drop-shadow-absolute-black/75"
+                className="relative z-10 lg:max-w-[350px] max-w-[400px] w-full mx-auto drop-shadow-xl dark:drop-shadow-absolute-white/15 drop-shadow-absolute-black/75"
               />
             </motion.div>
           </div>
