@@ -14,6 +14,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+    assetsInclude: ["**/*.riv"],
     test: {
     environment: "jsdom", 
     setupFiles: ["./src/tests/setup.ts"], 

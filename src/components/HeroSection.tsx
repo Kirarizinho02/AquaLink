@@ -190,7 +190,7 @@ const HeroSection = () => {
               />
               <img
                 src={aqualink_garrafa_app}
-                className="relative z-10 lg:max-w-[350px] max-w-[400px] w-full mx-auto drop-shadow-xl dark:drop-shadow-absolute-white/15 drop-shadow-absolute-black/75"
+                className="relative z-10 lg:max-w-[500px] max-w-[400px] w-full mx-auto drop-shadow-xl dark:drop-shadow-absolute-white/15 drop-shadow-absolute-black/75"
               />
             </motion.div>
           </div>

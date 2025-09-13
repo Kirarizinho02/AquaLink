@@ -6,6 +6,7 @@ import group_square from '@/assets/group-square.svg';
 import aqualink_3d_ver2_br from '@/assets/aqualink-3d-ver2-br.png';
 import aqualink_horizontal from '@/assets/aqualink-horizontal.svg';
 import aqualink_writing_2 from '@/assets/aqualink-writing-2.svg';
+import water_bar from '@/assets/water_bar_demo.riv'
 
 export { 
   logo_no_writing_aqualink_primary, 
@@ -15,5 +16,6 @@ export {
   group_square,
   aqualink_3d_ver2_br,
   aqualink_horizontal,
-  aqualink_writing_2
+  aqualink_writing_2,
+  water_bar
 };
