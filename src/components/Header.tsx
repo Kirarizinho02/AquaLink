@@ -1,6 +1,6 @@
 import { IoWaterOutline } from "react-icons/io5";
 import { AiOutlineTeam } from "react-icons/ai";
-import { FaInfo } from "react-icons/fa6";
+import { FaInfo, FaUser } from "react-icons/fa6";
 
 // Importação dos componentes do shadcn/ui
 
@@ -17,11 +17,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import {    
-  logo_no_writing_aqualink_primary,
-} from "@/assets";
+import { logo_no_writing_aqualink_primary } from "@/assets";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ThemeSwitcher } from "./ui/kibo-ui/theme-switcher";
+
+import { useAuthContext } from "@/hooks";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Array dos links da Nav
 const navigationLinks = [
@@ -31,6 +33,23 @@ const navigationLinks = [
 ];
 
 const Header = () => {
+  const { user, logout } = useAuthContext();
+
+  const [open, setOpen] = useState(false);
+  
+  const navigate = useNavigate();
+
+  const handleDashboard = () => {
+    setOpen(false);
+    navigate("/dashboard");
+  };
+
+  const handleLogout = async () => {
+    setOpen(false);
+    await logout();
+    navigate("/");
+  };
+
   return (
     <header className="px-4 md:px-6 py-5 margin mx-6 border-b max-w-[1880px] w-full">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -94,11 +113,15 @@ const Header = () => {
                     );
                   })}
                   <NavigationMenuItem>
-          <hr className="w-34 h-px my-1 bg-gray-200 border-0 dark:bg-gray-800" />
+                    <hr className="w-34 h-px my-1 bg-gray-200 border-0 dark:bg-gray-800" />
                   </NavigationMenuItem>
                   <NavigationMenuItem className="mx-auto w-full">
                     <NavigationMenuLink>
-                      <ThemeSwitcher defaultValue="system" onChange={console.log} className="flex justify-evenly content-evenly"/>
+                      <ThemeSwitcher
+                        defaultValue="system"
+                        onChange={console.log}
+                        className="flex justify-evenly content-evenly"
+                      />
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
@@ -143,12 +166,44 @@ const Header = () => {
         </div>
 
         {/* Coluna direita: Ações */}
-        <div className="flex flex-1 items-center justify-end gap-4">
-            <ThemeSwitcher defaultValue="system" onChange={console.log} className="hidden md:flex" />
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+    <div className="flex flex-1 items-center justify-end gap-4">
+          <ThemeSwitcher defaultValue="system" onChange={console.log} className="hidden md:flex" />
+          {!user ? (
+            <a href="/login" className="flex items-center gap-2 text-gray-800 hover:text-gray-600 transition-all duration-200 font-semibold hover:underline dark:text-gray-200 dark:hover:text-gray-400">
+              Login
+            </a>
+          ) : (
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon" className="p-0">
+                  {user.photoURL ? (
+                    <Avatar>
+                      <AvatarImage src={user.photoURL} />
+                      <AvatarFallback>
+                        {user.displayName?.[0] ?? <FaUser />}
+                      </AvatarFallback>
+                    </Avatar>
+                  ) : (
+                    <FaUser size={32} className="text-muted-foreground" />
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="end" className="w-40 p-2">
+                <button
+                  className="w-full text-left px-2 py-1 hover:bg-muted rounded"
+                  onClick={handleDashboard}
+                >
+                  Dashboard
+                </button>
+                <button
+                  className="w-full text-left px-2 py-1 hover:bg-muted rounded text-red-500"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       </div>
     </header>

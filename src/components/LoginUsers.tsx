@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useId, useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
 
@@ -5,12 +7,19 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { LoginAlerts } from "./LoginAlerts";
 
 import { logo_no_writing_aqualink_primary } from "@/assets";
 
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail, getAuth } from "firebase/auth";
 import { useAuthContext } from "@/hooks";
+
+type AlertType = {
+  type: "error" | "success";
+  message: string;
+  details?: string[];
+};
 
 const LoginUsers = () => {
   const id = useId();
@@ -19,73 +28,113 @@ const LoginUsers = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+  const [alert, setAlert] = useState<AlertType | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault(); // Previne o comportamento padrão do formulário
+    setAlert(null);
     try {
-      await login(email, password);
-      console.log("User logged in successfully"); // Caso de sucesso, onde usuário e senha são válidos
-      navigation("/dashboard");
-    } catch (error) {
-      console.error("Error logging in:", error); // Caso de erro (não específico)
+      await login(email, password, remember);
+      setAlert({
+        type: "success",
+        message: "Login realizado com sucesso!",
+      }); // Caso de sucesso, onde usuário e senha são válidos
+      setTimeout(() => navigation("/dashboard"), 1200);
+    } catch (error: any) {
+      let details: string[] = [];
+      if (error.code === "auth/user-not-found") {
+        details = ["Usuário não encontrado."];
+      } else if (error.code === "auth/wrong-password") {
+        details = ["Senha incorreta."];
+      } else if (error.code === "auth/invalid-email") {
+        details = ["Email inválido."];
+      } else if (error.code === "auth/invalid-credential") {
+        details = ["Credenciais inválidas."];
+      } else {
+        details = [error.message || "Erro desconhecido."];
+      }
+      setAlert({
+        type: "error",
+        message: "Erro ao fazer login.",
+        details,
+      });
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle(); // Abre um popup para o usuário fazer login com a conta Google
-      console.log("User logged in successfully with Google");
-      navigation("/dashboard");
-    } catch (error) {
-      // Usamos 'FirebaseError' para ter acesso a propriedades específicas de erro do Firebase Auth
-      console.error("Error logging in with Google:", error);
-      if (
-        (error as import("firebase/app").FirebaseError).code ===
-        "auth/popup-closed-by-user"
-      ) {
-        console.log("Popup fechado pelo usuário.");
-      } else if (
-        (error as import("firebase/app").FirebaseError).code ===
-        "auth/cancelled-popup-request"
-      ) {
-        console.log("Requisição de popup cancelada.");
+      await loginWithGoogle(remember); // Abre um popup para o usuário fazer login com a conta Google
+      setAlert({
+        type: "success",
+        message: "Login com Google realizado com sucesso!",
+      });
+      setTimeout(() => navigation("/dashboard"), 1200);
+    } catch (error: any) {
+      let details: string[] = [];
+      if (error.code === "auth/popup-closed-by-user") {
+        details = ["Popup fechado pelo usuário."];
+      } else if (error.code === "auth/cancelled-popup-request") {
+        details = ["Requisição de popup cancelada."];
+      } else {
+        details = [error.message || "Erro desconhecido."];
       }
+      setAlert({
+        type: "error",
+        message: "Erro ao fazer login com Google.",
+        details,
+      });
     }
   };
 
   const handleGithubLogin = async () => {
+    setAlert(null);
     try {
-      await loginWithGithub();
-      console.log("User logged in successfully with GitHub");
-      navigation("/dashboard");
-    } catch (error) {
-      console.error("Error logging in with GitHub:", error);
-      if (
-        (error as import("firebase/app").FirebaseError).code ===
-        "auth/popup-closed-by-user"
-      ) {
-        console.log("Popup fechado pelo usuário.");
-      } else if (
-        (error as import("firebase/app").FirebaseError).code ===
-        "auth/cancelled-popup-request"
-      ) {
-        console.log("Requisição de popup cancelada.");
+      await loginWithGithub(remember);
+      setAlert({
+        type: "success",
+        message: "Login com GitHub realizado com sucesso!",
+      });
+      setTimeout(() => navigation("/dashboard"), 1200);
+    } catch (error: any) {
+      let details: string[] = [];
+      if (error.code === "auth/popup-closed-by-user") {
+        details = ["Popup fechado pelo usuário."];
+      } else if (error.code === "auth/cancelled-popup-request") {
+        details = ["Requisição de popup cancelada."];
+      } else {
+        details = [error.message || "Erro desconhecido."];
       }
+      setAlert({
+        type: "error",
+        message: "Erro ao fazer login com GitHub.",
+        details,
+      });
     }
   };
 
   const handleForgotPassword = async () => {
+    setAlert(null);
     if (!email) {
-      alert("Por favor, insira seu email para redefinir a senha.");
+      setAlert({
+        type: "error",
+        message: "Por favor, insira seu email para redefinir a senha.",
+      });
       return;
     }
     try {
       const auth = getAuth();
       await sendPasswordResetEmail(auth, email);
-      alert("Email de redefinição de senha enviado!");
-    } catch (error) {
-      console.error("Erro ao enviar email de redefinição de senha:", error);
-      alert("Erro ao enviar email de redefinição de senha.");
+      setAlert({
+        type: "success",
+        message: "Email de redefinição de senha enviado!",
+      });
+    } catch (error: any) {
+      setAlert({
+        type: "error",
+        message: "Erro ao enviar email de redefinição de senha.",
+        details: [error.message || "Tente novamente."],
+      });
     }
   };
 
@@ -127,7 +176,11 @@ const LoginUsers = () => {
           </div>
           <div className="inline-flex justify-between w-90">
             <div className="inline-flex items-center gap-2">
-              <Checkbox id={id} />
+              <Checkbox
+                id={id}
+                checked={remember}
+                onCheckedChange={(checked) => setRemember(checked === true)}
+              />
               <Label htmlFor={id}>Lembrar de mim</Label>
             </div>
             <p
@@ -179,6 +232,13 @@ const LoginUsers = () => {
             Registre-se
           </a>
         </p>
+        {alert && typeof alert === "object" && "type" in alert && (
+          <LoginAlerts
+            type={alert.type}
+            message={alert.message}
+            details={alert.details}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,6 +23,8 @@ import {
 import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { logo_no_writing_aqualink_primary, water_bar } from "@/assets";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext, usePasswordStrength } from "@/hooks";
+import { LoginAlerts } from "@/components";
 
 interface FormData {
   [key: string]: any;
@@ -34,11 +35,22 @@ interface MultiStepFormProps {
   onSubmit?: (data: FormData) => void;
 }
 
-const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
+const RegisterPage = ({ className }: MultiStepFormProps) => {
+  const { register: registerUser } = useAuthContext();
+
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+
+  const [alert, setAlert] = useState<{
+    type: "error" | "success";
+    message: string;
+    details?: string[];
+  } | null>(null);
+
+  const password = formData.password ?? "";
+  const passwordCheck = usePasswordStrength(password);
 
   const steps = [
     {
@@ -51,18 +63,21 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
           label: "Nome",
           type: "text",
           placeholder: "João",
+          required: true,
         },
         {
           name: "lastName",
           label: "Sobrenome",
           type: "text",
           placeholder: "Silva",
+          required: true,
         },
         {
           name: "email",
           label: "E-mail",
           type: "email",
           placeholder: "joao.silva@exemplo.com",
+          required: true,
         },
       ],
     },
@@ -76,12 +91,14 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
           label: "Altura",
           type: "text",
           placeholder: "1.75m",
+          required: true,
         },
         {
           name: "date",
           label: "Data de Nascimento",
           type: "text",
           placeholder: "30/11/2000",
+          required: true,
         },
         {
           name: "gender",
@@ -94,6 +111,7 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
             { value: "outro", label: "Outro" },
           ],
           placeholder: "Selecione seu gênero",
+          required: true,
         },
       ],
     },
@@ -107,45 +125,116 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
           label: "Senha",
           type: "password",
           placeholder: "••••••••",
+          required: true,
         },
         {
           name: "confirmPassword",
           label: "Confirmar Senha",
           type: "password",
           placeholder: "••••••••",
+          required: true,
         },
       ],
     },
   ];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<any>({
-    defaultValues: formData,
-  });
-
   const progress = ((step + 1) / steps.length) * 100;
 
-  const handleNextStep = (data: any) => {
+  const handleNextStep = async (data: any) => {
+    // Validação dos campos obrigatórios do passo atual
+    const currentFields = steps[step].fields;
+    let hasError = false;
+    const missingFields: string[] = [];
+
+    for (const field of currentFields) {
+      if (field.required) {
+        const value = data[field.name] ?? formData[field.name] ?? "";
+        if (
+          typeof value === "string"
+            ? value.trim() === ""
+            : value === undefined || value === null
+        ) {
+          hasError = true;
+          missingFields.push(field.label);
+        }
+      }
+    }
+
+    if (hasError) {
+      setAlert({
+        type: "error",
+        message: "Preencha todos os campos obrigatórios.",
+        details: missingFields,
+      });
+      return;
+    }
+
     const updatedData = { ...formData, ...data };
     setFormData(updatedData);
 
-    if (step < steps.length - 1) {
-      setStep(step + 1);
-      reset(updatedData);
-    } else {
+    if (step === steps.length - 1) {
+      // Checa força da senha
+      if (passwordCheck.strength === "fraca") {
+        setAlert({
+          type: "error",
+          message: "A senha não atende aos requisitos:",
+          details: passwordCheck.requirements,
+        });
+        return;
+      }
+      // Checa se as senhas coincidem
+      if (updatedData.password !== updatedData.confirmPassword) {
+        setAlert({
+          type: "error",
+          message: "As senhas não coincidem.",
+        });
+        return;
+      }
+
       setIsSubmitting(true);
-      setTimeout(() => {
-        if (onSubmit) {
-          onSubmit(updatedData as FormData);
-        }
+      setAlert(null);
+
+      if (!updatedData.password) {
+        setAlert({
+          type: "error",
+          message: "Senha obrigatória.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+      if (!updatedData.email) {
+        setAlert({
+          type: "error",
+          message: "Email obrigatório.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      try {
+        // Cria usuário autenticado e salva no database
+        await registerUser({
+          email: updatedData.email,
+          password: updatedData.password,
+          firstName: updatedData.firstName,
+          lastName: updatedData.lastName,
+          height: updatedData.height,
+          date: updatedData.date,
+          gender: updatedData.gender,
+        });
         setIsComplete(true);
         setIsSubmitting(false);
-      }, 1500);
+      } catch (error: any) {
+        setAlert({
+          type: "error",
+          message: "Erro ao criar usuário.",
+          details: [error.message || "Tente novamente."],
+        });
+        setIsSubmitting(false);
+      }
+      return;
     }
+      setStep(step + 1);
   };
 
   const handlePrevStep = () => {
@@ -220,7 +309,7 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
     >
       <div className="grid lg:grid-cols-2 min-h-screen">
         <div className="hidden lg:block mt-20">
-          <RiveComponent style={{ width: "100%", height: "100%"}} />
+          <RiveComponent style={{ width: "100%", height: "100%" }} />
         </div>
         {!isComplete ? (
           <div
@@ -296,7 +385,18 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
                 </div>
 
                 <form
-                  onSubmit={handleSubmit(handleNextStep)}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    // Coleta apenas os campos visíveis da etapa atual
+                    const data: any = {};
+                    steps[step].fields.forEach((field) => {
+                      data[field.name] =
+                        formData[field.name] ??
+                        e.currentTarget[field.name]?.value ??
+                        "";
+                    });
+                    handleNextStep(data);
+                  }}
                   className="space-y-4"
                 >
                   {steps[step].fields.map((field) => (
@@ -326,18 +426,18 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
                       ) : (
                         <Input
                           id={field.name}
+                          name={field.name}
                           type={field.type}
                           placeholder={field.placeholder}
-                          {...register(field.name as any)}
-                          className={cn(
-                            errors[field.name as string] && "border-destructive"
-                          )}
+                          value={formData[field.name] ?? ""}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              [field.name]: e.target.value,
+                            }))
+                          }
+                          required={field.required}
                         />
-                      )}
-                      {errors[field.name as string] && (
-                        <p className="text-destructive text-sm">
-                          {errors[field.name as string]?.message as string}
-                        </p>
                       )}
                     </div>
                   ))}
@@ -372,6 +472,13 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
                   </div>
                 </form>
               </motion.div>
+              {alert && (
+                <LoginAlerts
+                  type={alert.type}
+                  message={alert.message}
+                  details={alert.details}
+                />
+              )}
             </AnimatePresence>
           </div>
         ) : (
@@ -382,7 +489,7 @@ const RegisterPage = ({ className, onSubmit }: MultiStepFormProps) => {
             className="py-10 text-center"
           >
             <div className="bg-primary/10 mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full">
-              <CheckCircle2 className="text-primary h-8 w-8" />
+              <CheckCircle2 className="text-green-500 h-8 w-8 -mb-12" />
             </div>
             <h2 className="mb-2 text-2xl font-bold">Cadastro Realizado!</h2>
             <p className="text-muted-foreground mb-6">
