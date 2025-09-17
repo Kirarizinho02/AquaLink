@@ -1,6 +1,9 @@
 import { HeroSection } from "@/components";
+import { usePageTitle } from "@/hooks";
 
 const LandingPage = () => {
+  usePageTitle("AquaLink");
+
   return (
     <>
         <HeroSection />

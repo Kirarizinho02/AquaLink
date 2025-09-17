@@ -9,3 +9,11 @@ h1, h2, h3, h4, h5, h6 {
 p, small, .xs {
   font-family: var(--font-lato);
 }
+
+.poppins {
+  font-family: var(--font-poppins) !important;
+}
+
+.lato {
+  font-family: var(--font-lato) !important;
+}

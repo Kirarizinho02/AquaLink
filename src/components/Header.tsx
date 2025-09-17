@@ -24,6 +24,7 @@ import { ThemeSwitcher } from "./ui/kibo-ui/theme-switcher";
 import { useAuthContext } from "@/hooks";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LucideLayoutDashboard, LucideLogOut, LucideUser } from "lucide-react";
 
 // Array dos links da Nav
 const navigationLinks = [
@@ -36,12 +37,17 @@ const Header = () => {
   const { user, logout } = useAuthContext();
 
   const [open, setOpen] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleDashboard = () => {
     setOpen(false);
     navigate("/dashboard");
+  };
+
+  const handleProfile = () => {
+    setOpen(false);
+    navigate("/profile");
   };
 
   const handleLogout = async () => {
@@ -166,10 +172,17 @@ const Header = () => {
         </div>
 
         {/* Coluna direita: Ações */}
-    <div className="flex flex-1 items-center justify-end gap-4">
-          <ThemeSwitcher defaultValue="system" onChange={console.log} className="hidden md:flex" />
+        <div className="flex flex-1 items-center justify-end gap-4">
+          <ThemeSwitcher
+            defaultValue="system"
+            onChange={console.log}
+            className="hidden md:flex"
+          />
           {!user ? (
-            <a href="/login" className="flex items-center gap-2 text-gray-800 hover:text-gray-600 transition-all duration-200 font-semibold hover:underline dark:text-gray-200 dark:hover:text-gray-400">
+            <a
+              href="/login"
+              className="flex items-center gap-2 text-gray-800 hover:text-gray-600 transition-all duration-200 font-semibold hover:underline dark:text-gray-200 dark:hover:text-gray-400"
+            >
               Login
             </a>
           ) : (
@@ -189,18 +202,29 @@ const Header = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent align="end" className="w-40 p-2">
-                <button
-                  className="w-full text-left px-2 py-1 hover:bg-muted rounded"
-                  onClick={handleDashboard}
-                >
-                  Dashboard
-                </button>
-                <button
-                  className="w-full text-left px-2 py-1 hover:bg-muted rounded text-red-500"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
+                <div className="border-b mb-2 pb-2 space-y-2">
+                  <button
+                    className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200"
+                    onClick={handleDashboard}
+                  >
+                  <LucideLayoutDashboard className="flex text-gray-300" size={18} />
+                    Dashboard
+                  </button>
+                  <button
+                    className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200"
+                    onClick={handleProfile}
+                  >
+                  <LucideUser className="flex text-gray-300" size={18} />
+                    Perfil
+                  </button>
+                </div>
+                  <button
+                    className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200 text-red-500"
+                    onClick={handleLogout}
+                  >
+                  <LucideLogOut className="flex" size={18} />
+                    Sair
+                  </button>
               </PopoverContent>
             </Popover>
           )}

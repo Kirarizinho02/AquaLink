@@ -23,7 +23,7 @@ import {
 import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { logo_no_writing_aqualink_primary, water_bar } from "@/assets";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext, usePasswordStrength } from "@/hooks";
+import { useAuthContext, usePageTitle, usePasswordStrength } from "@/hooks";
 import { LoginAlerts } from "@/components";
 
 interface FormData {
@@ -36,6 +36,8 @@ interface MultiStepFormProps {
 }
 
 const RegisterPage = ({ className }: MultiStepFormProps) => {
+  usePageTitle("Cadastro | AquaLink");
+
   const { register: registerUser } = useAuthContext();
 
   const [step, setStep] = useState(0);
