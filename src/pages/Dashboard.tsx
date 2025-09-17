@@ -19,6 +19,13 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose
+} from "@/components/ui/dialog";
 import { ThemeSwitcher } from "@/components/ui/kibo-ui/theme-switcher";
 import { usePageTitle } from "@/hooks";
 import { format, subDays, isAfter } from "date-fns";
@@ -39,7 +46,7 @@ const PERIODS = [
   { label: "Últimos 30 dias", value: 30 },
 ];
 
-const BOTTLE_ID = "12345678-1234-1234-1234-1234567890ab"; // Troque pelo id real
+const BOTTLE_ID = "12345678-1234-1234-1234-1234567890ab";
 
 const Dashboard = () => {
   usePageTitle("Dashboard | AquaLink");
@@ -54,6 +61,18 @@ const Dashboard = () => {
   const [bottleInfo, setBottleInfo] = useState<any>(null);
   const [reminders, setReminders] = useState<any[]>([]);
   const [showReminderModal, setShowReminderModal] = useState(false);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 10;
+  const hydrationData = readings;
+  const totalPages = Math.ceil(hydrationData.length / itemsPerPage);
+
+  const paginatedData = [...hydrationData].reverse().slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
@@ -170,7 +189,7 @@ const Dashboard = () => {
       readings.forEach((r: any) => {
         const dayIndex = Math.floor(
           (new Date(r.timestamp).getTime() - startDate.getTime()) /
-            (1000 * 60 * 60 * 24)
+          (1000 * 60 * 60 * 24)
         );
         const weekIndex = Math.min(Math.floor(dayIndex / 7), 3);
         if (weekIndex >= 0 && weekIndex < 4) weeks[weekIndex].push(r);
@@ -244,17 +263,17 @@ const Dashboard = () => {
             {PERIODS.map((p) => (
               <button
                 key={p.value}
-                className={`px-3 py-1 rounded-full border hover:bg-muted/30 transition-all duration-200 cursor-pointer ${
-                  period === p.value
-                    ? "bg-azul-primario text-white"
-                    : "bg-white dark:bg-muted/50 dark:text-azul-quintenario text-azul-primario"
-                }`}
+                className={`px-3 py-1 rounded-full border hover:bg-muted/30 transition-all duration-200 cursor-pointer ${period === p.value
+                  ? "bg-azul-primario text-white"
+                  : "bg-white dark:bg-muted/50 dark:text-azul-quintenario text-azul-primario"
+                  }`}
                 onClick={() => setPeriod(p.value)}
               >
                 {p.label}
               </button>
             ))}
           </div>
+
           {/* Cards */}
           <div className="grid auto-rows-min gap-4 md:grid-cols-3 max-h-full">
             {/* Total ingerido */}
@@ -469,11 +488,11 @@ const Dashboard = () => {
                         className="max-h-full my-2"
                       />
                       <span className="text-xs text-gray-500">
-                    Cadastrada em{" "}
-                    {bottleInfo?.dataCadastro
-                      ? format(new Date(bottleInfo.dataCadastro), "dd/MM/yyyy")
-                      : "--/--/----"}
-                  </span>
+                        Cadastrada em{" "}
+                        {bottleInfo?.dataCadastro
+                          ? format(new Date(bottleInfo.dataCadastro), "dd/MM/yyyy")
+                          : "--/--/----"}
+                      </span>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center h-full  my-auto">
@@ -481,14 +500,14 @@ const Dashboard = () => {
                         <GlassWater size={32} />
                       </div>
                       <span className="text-xs text-gray-500">
-                    Cadastrada em{" "}
-                    {bottleInfo?.dataCadastro
-                      ? format(new Date(bottleInfo.dataCadastro), "dd/MM/yyyy")
-                      : "--/--/----"}
-                  </span>
+                        Cadastrada em{" "}
+                        {bottleInfo?.dataCadastro
+                          ? format(new Date(bottleInfo.dataCadastro), "dd/MM/yyyy")
+                          : "--/--/----"}
+                      </span>
                     </div>
                   )}
-                  
+
                 </div>
                 {/* Direita */}
                 <div className="flex flex-col justify-center w-1/2 gap-2">
@@ -505,15 +524,15 @@ const Dashboard = () => {
                         bottleInfo?.conectado === undefined
                           ? "text-gray-400"
                           : bottleInfo?.conectado
-                          ? "text-green-600"
-                          : "text-red-600"
+                            ? "text-green-600"
+                            : "text-red-600"
                       }
                     >
                       {bottleInfo?.conectado === undefined
                         ? "--"
                         : bottleInfo?.conectado
-                        ? "Conectado"
-                        : "Desconectado"}
+                          ? "Conectado"
+                          : "Desconectado"}
                     </b>
                   </span>
                 </div>
@@ -522,7 +541,7 @@ const Dashboard = () => {
           </div>
           {/* Relatório de hidratação */}
           <div className="bg-muted/50 min-h-[300px] flex-1 rounded-xl md:min-h-min p-4 flex flex-col">
-            <div className="flex items-center mb-4 ">
+            <div className="flex items-center mb-4">
               <span
                 className="inline-flex items-center justify-center rounded-full bg-[#E4E4E4] dark:bg-gray-700"
                 style={{ width: 32, height: 32 }}
@@ -536,24 +555,88 @@ const Dashboard = () => {
                 Relatório de Hidratação
               </span>
             </div>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                {period === 30 ? (
-                  <XAxis dataKey="semana" />
-                ) : (
-                  <XAxis dataKey="dia" />
-                )}
-                <YAxis domain={[0, period === 30 ? 20 : "auto"]} unit="L" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Meta" fill="#29ebd5" radius={[4, 4, 0, 0]} />
-                <Bar
-                  dataKey="Desempenho"
-                  fill="#2563eb"
-                  radius={[4, 4, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+
+            {/* Layout atualizado: duas colunas */}
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Coluna do gráfico */}
+              <div className="flex-1">
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={chartData}>
+                    {period === 30 ? (
+                      <XAxis dataKey="semana" />
+                    ) : (
+                      <XAxis dataKey="dia" />
+                    )}
+                    <YAxis domain={[0, period === 30 ? 20 : "auto"]} unit="L" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Meta" fill="#29ebd5" radius={[4, 4, 0, 0]} />
+                    <Bar
+                      dataKey="Desempenho"
+                      fill="#2563eb"
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Coluna das últimas 5 leituras */}
+              <div className="flex-1 bg-white dark:bg-gray-800 border-s ps-6">
+                <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  Últimas Leituras
+                </h3>
+                <div
+                  className="space-y-2 cursor-pointer"
+                  onClick={() => setIsDialogOpen(true)} // Abre o modal ao clicar
+                >
+                  {[...hydrationData].reverse().slice(0, 5).map((reading, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between border-b py-2 last:border-none text-gray-700 dark:text-gray-300"
+                    >
+                      <span>{new Date(reading.timestamp).toLocaleTimeString()}</span>
+                      <span>{reading.consumo} ml</span>
+                    </div>
+                  ))}
+                </div>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Histórico de Leituras</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-2">
+                      {paginatedData.map((reading, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between border-b py-2 last:border-none"
+                        >
+                          <span>{new Date(reading.timestamp).toLocaleString()}</span>
+                          <span>{reading.consumo} ml</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex justify-between items-center mt-4">
+                      <button
+                        className="px-3 py-1 border rounded disabled:opacity-50"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage((prev) => prev - 1)}
+                      >
+                        Anterior
+                      </button>
+                      <span>{`${currentPage} de ${totalPages}`}</span>
+                      <button
+                        className="px-3 py-1 border rounded disabled:opacity-50"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage((prev) => prev + 1)}
+                      >
+                        Próximo
+                      </button>
+                    </div>
+                    <DialogClose className="mt-4">Fechar</DialogClose>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
           </div>
         </div>
       </SidebarInset>
