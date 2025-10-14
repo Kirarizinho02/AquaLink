@@ -9,7 +9,7 @@ const LandingPage = () => {
     <>
       <HeroSection />
 
-      <div id="features" className="mx-auto px-6 md:px-10 lg:px-16 z-10 relative -mt-16">
+      <div id="features" className="mx-auto px-6 md:px-10 lg:px-16 z-10 relative">
         <div className="text-center pt-8 md:pt-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-absolute-white dark:bg-black/40 backdrop-blur px-3 py-1 text-xs font-medium">
             <Droplets size={14} className="text-azul-primario dark:text-azul-quintenario" />

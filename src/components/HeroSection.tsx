@@ -182,7 +182,7 @@ const HeroSection = () => {
               }}
               initial="hidden"
               animate="visible"
-              className="w-full items-center"
+              className="w-full items-center mb-12"
             >
               <img
                 src={group_square}

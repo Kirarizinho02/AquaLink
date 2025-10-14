@@ -488,7 +488,7 @@ const RegisterPage = ({ className }: MultiStepFormProps) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="py-10 text-center"
+            className="py-10 text-center mt-auto mb-auto"
           >
             <div className="bg-primary/10 mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full">
               <CheckCircle2 className="text-green-500 h-8 w-8 -mb-12" />

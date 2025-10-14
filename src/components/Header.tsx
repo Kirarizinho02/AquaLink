@@ -20,16 +20,15 @@ import {
 import { logo_no_writing_aqualink_primary } from "@/assets";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ThemeSwitcher } from "./ui/kibo-ui/theme-switcher";
-
 import { useAuthContext } from "@/hooks";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { LucideLayoutDashboard, LucideLogOut, LucideUser } from "lucide-react";
 
 // Array dos links da Nav
 const navigationLinks = [
-  { href: "/", label: "Home", icon: IoWaterOutline, active: true },
-  { href: "#", label: "Sobre", icon: AiOutlineTeam },
+  { href: "/", label: "Home", icon: IoWaterOutline },
+  { href: "/about", label: "Sobre", icon: AiOutlineTeam },
   { href: "#", label: "Informativos", icon: FaInfo },
 ];
 
@@ -39,6 +38,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDashboard = () => {
     setOpen(false);
@@ -101,12 +101,17 @@ const Header = () => {
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => {
                     const Icon = link.icon;
+                    const isActive = location.pathname === link.href;
+
                     return (
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
-                          href={link.href}
+                          active={isActive}
                           className="flex-row items-center gap-2 py-1.5"
-                          active={link.active}
+                          onClick={() => {
+                            navigate(link.href);
+                            setOpen(false);
+                          }}
                         >
                           <Icon
                             size={16}
@@ -139,12 +144,17 @@ const Header = () => {
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => {
                 const Icon = link.icon;
+                const isActive = location.pathname === link.href; // Verifica se o link é o ativo
+
                 return (
-                  <NavigationMenuItem key={index}>
+                  <NavigationMenuItem key={index} className="w-full">
                     <NavigationMenuLink
-                      active={link.active}
-                      href={link.href}
-                      className="text-foreground hover:text-primary flex-row items-center gap-2 py-1.5 font-medium"
+                      className="flex-row items-center gap-2 py-1.5"
+                      active={isActive}
+                      onClick={() => {
+                        navigate(link.href);
+                        setOpen(false);
+                      }}
                     >
                       <Icon
                         size={16}
@@ -156,6 +166,7 @@ const Header = () => {
                   </NavigationMenuItem>
                 );
               })}
+
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -207,24 +218,24 @@ const Header = () => {
                     className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200"
                     onClick={handleDashboard}
                   >
-                  <LucideLayoutDashboard className="flex text-gray-300" size={18} />
+                    <LucideLayoutDashboard className="flex text-gray-300" size={18} />
                     Dashboard
                   </button>
                   <button
                     className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200"
                     onClick={handleProfile}
                   >
-                  <LucideUser className="flex text-gray-300" size={18} />
+                    <LucideUser className="flex text-gray-300" size={18} />
                     Perfil
                   </button>
                 </div>
-                  <button
-                    className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200 text-red-500"
-                    onClick={handleLogout}
-                  >
+                <button
+                  className="w-full text-left gap-2 ps-2 py-1 hover:bg-muted rounded inline-flex items-center transition-all duration-200 text-red-500"
+                  onClick={handleLogout}
+                >
                   <LucideLogOut className="flex" size={18} />
-                    Sair
-                  </button>
+                  Sair
+                </button>
               </PopoverContent>
             </Popover>
           )}

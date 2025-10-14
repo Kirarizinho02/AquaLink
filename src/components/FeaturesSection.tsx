@@ -186,7 +186,10 @@ const FeaturesSection = () => {
   const activeFeature = useMemo(() => features[activeIndex], [activeIndex]);
 
   return (
-    <section className="mx-auto rounded-2xl px-6 md:px-10 lg:px-16 relative -mt-36 ">
+    <section 
+    className="mx-auto rounded-2xl px-6 md:px-10 lg:px-16 relative "
+    style={{ marginTop: `calc(-4vh)` }}
+    >
       <div ref={pinRef} style={{ height: `calc(${features.length} * 110vh)` }} className="relative">
         <div className="sticky top-0 h-screen flex items-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 w-full items-start">
