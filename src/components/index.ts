@@ -3,4 +3,5 @@ export * from './HeroSection';
 export * from './LoginUsers';
 export * from './Footer';
 export * from './ProtectedRoute';
+export * from './FeaturesSection';
 export * from './LoginAlerts';

@@ -8,16 +8,19 @@ import aqualink_horizontal from '@/assets/aqualink-horizontal.svg';
 import aqualink_writing_2 from '@/assets/aqualink-writing-2.svg';
 import water_bar from '@/assets/water_bar_demo.riv';
 import aqualink_classic from '@/assets/aqualink-classic.png';
+import noise from '@/assets/noise.png';
+
 
 export { 
   logo_no_writing_aqualink_primary, 
   logo_aqualink_drop_shadow,
   aqualink_garrafa_app,
+  noise,
   background_squares,
   group_square,
   aqualink_3d_ver2_br,
   aqualink_horizontal,
   aqualink_writing_2,
   water_bar,
-  aqualink_classic
+  aqualink_classic,
 };

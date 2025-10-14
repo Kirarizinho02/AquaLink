@@ -27,6 +27,25 @@
   @apply rounded-full;
 }
 
+.features-section-gradient {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-secondary) 30%,
+    var(--color-secondary) 100%
+  );
+}
+
+.dark .features-section-gradient {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-absolute-black) 30%,
+    var(--color-absolute-black) 100%
+  );
+}
+  
+
 .button-border::before {
   filter: blur(5px);
   opacity: 0.5;
