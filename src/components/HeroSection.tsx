@@ -46,7 +46,7 @@ const HeroSection = () => {
     <>
       <div
         ref={heroRef}
-        className="relative min-h-screen w-full overflow-hidden py-8"
+        className="relative min-h-screen w-full overflow-hidden py-12"
       >
         <motion.div
           className="relative z-10 container mx-auto max-w-7xl mt-6 md:mt-0"
@@ -186,7 +186,7 @@ const HeroSection = () => {
             >
               <img
                 src={group_square}
-                className="absolute left-3/5 -z-10 opacity-26 pointer-events-none select-none"
+                className="absolute left-3/5 -z-10 opacity-26 pointer-events-none select-none hidden lg:block"
               />
               <img
                 src={aqualink_garrafa_app}

@@ -1,3 +1,4 @@
+export * from './AnimatedLineSVG';
 export * from './Header';
 export * from './HeroSection';
 export * from './LoginUsers';
@@ -5,3 +6,5 @@ export * from './Footer';
 export * from './ProtectedRoute';
 export * from './FeaturesSection';
 export * from './LoginAlerts';
+export * from './MockSection';
+export * from './CTASection';

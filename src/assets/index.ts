@@ -9,6 +9,7 @@ import aqualink_writing_2 from '@/assets/aqualink-writing-2.svg';
 import water_bar from '@/assets/water_bar_demo.riv';
 import aqualink_classic from '@/assets/aqualink-classic.png';
 import noise from '@/assets/noise.png';
+import mock_horizontal from '@/assets/mock-horizontal.png';
 
 
 export { 
@@ -23,4 +24,5 @@ export {
   aqualink_writing_2,
   water_bar,
   aqualink_classic,
+  mock_horizontal
 };
