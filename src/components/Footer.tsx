@@ -3,7 +3,7 @@ import { FaGithub, FaInstagram } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const data = {
-  instaLink: "https://instagram.com/AquaLinkTCC",
+  instaLink: "https://instagram.com/aqualink.inc",
   githubLink: "https://github.com/Kirarizinho02/AquaLink",
 };
 
@@ -14,13 +14,13 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary dark:bg-secondary/20 mt-2 w-full place-self-end rounded-t-xl">
+    <footer className="bg-secondary dark:bg-secondary/20 mt-2 w-full place-self-end rounded-t-xl max-w-[1880px] mx-auto">
       <div className="mx-auto max-w-[1880px] w-full pb-6 pt-12">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5 px-6 md:px-12 lg:px-16 lg:ps-22">
           {/* Coluna 1: Logo e descrição */}
           <div>
             <div className="flex justify-center gap-2 sm:justify-start">
-              <img src={aqualink_writing_2} className="h-14 mb-6  " />
+              <img src={aqualink_writing_2} className="h-10 mb-6" />
             </div>
             <div className="flex justify-center sm:justify-start gap-2"></div>
           </div>
@@ -117,7 +117,7 @@ const Footer = () => {
                 <li key={label}>
                   <Link
                     to={href}
-                    className="text-black/90 hover:text-black/40 transition"
+                    className="text-black/90 hover:text-black/40 transition dark:text-white/90 dark:hover:text-white/40"
                   >
                     <span className="sr-only">{label}</span>
                     <Icon className="size-6" />

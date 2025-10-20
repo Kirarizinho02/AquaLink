@@ -1,0 +1,16 @@
+body, html {
+  background: var(--color-background); 
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  background: var(--color-background);
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cinza);
+  border-radius: 10px;
+  border: 1px solid transparent; 
+  background-clip: padding-box; 
+}

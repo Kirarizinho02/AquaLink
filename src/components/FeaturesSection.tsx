@@ -126,7 +126,6 @@ const FeaturesSection = forwardRef<HTMLDivElement>((_props, ref) => {
             Features
           </span>
               <span className="from-primary/0 via-primary to-primary/0 absolute -bottom-px left-1/2 h-px w-2/5 -translate-x-1/2 bg-gradient-to-r"></span>
-              <span className="absolute inset-0 bg-[radial-gradient(30%_40%_at_50%_100%,hsl(var(--primary)/0.25)_0%,transparent_100%)]"></span>
             </div>
             <h2 className="text-foreground mb-2 text-center text-2xl sm:mb-2.5 md:text-[2rem] font-semibold">
               Principais características do  

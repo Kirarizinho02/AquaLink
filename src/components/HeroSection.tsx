@@ -46,7 +46,7 @@ const HeroSection = () => {
     <>
       <div
         ref={heroRef}
-        className="relative min-h-screen w-full overflow-hidden py-12"
+        className="relative min-h-full w-full overflow-hidden py-12"
       >
         <motion.div
           className="relative z-10 container mx-auto max-w-7xl mt-6 md:mt-0"

@@ -6,6 +6,8 @@ import * as THREE from "three";
 import { Droplet, ShieldCheck, BarChart3 } from "lucide-react";
 import { CustomIcon } from "./ui/custom-icon";
 import { GradientText } from "./ui/gradient-text";
+import Autoplay from "embla-carousel-autoplay";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "./ui/carousel";
 
 function RotatingModel() {
   const group = useRef<THREE.Group>(null);
@@ -49,7 +51,6 @@ function BottleLights() {
   }, []);
   return (
     <>
-      {/* Fill leve para não ficar escuro demais */}
       <ambientLight intensity={0.45} />
       <pointLight position={[-3, 2, 3]} intensity={0.6} />
       {/* Spotlight principal apontando para o centro da garrafa (0,0,0) */}
@@ -58,8 +59,8 @@ function BottleLights() {
         position={[2.5, 5, 6]}
         angle={Math.PI / 4}
         penumbra={0.5}
-        intensity={6}     // mais forte para destacar
-        distance={0}      // sem atenuação por distância
+        intensity={6}     
+        distance={0}      
         decay={1}
         castShadow
         shadow-bias={-0.0002}
@@ -90,6 +91,19 @@ const qualities = [
 ];
 
 const MockSection = () => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+    const onSelect = () => setSelectedIndex(carouselApi.selectedScrollSnap());
+    carouselApi.on("select", onSelect);
+    onSelect();
+    return () => {
+      carouselApi.off("select", onSelect);
+    };
+  }, [carouselApi]);
+
   return (
     <section className="relative py-14 md:py-16 lg:pb-20 container mx-auto">
       <div className="container mx-auto max-w-6xl px-6">
@@ -103,10 +117,7 @@ const MockSection = () => {
             O Aqualink Classic é o que torna o projeto único. Combinando design elegante e praticidade, descubra um pouco mais sobre a garrafa que vai <span className="font-bold"> transformar </span>sua rotina de hidratação.
           </p>
         </header>
-        <div
-          className="relative grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 items-start z-10"
-        >
-
+        <div className="relative grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 items-start z-10">
           {/* Metade esquerda */}
           <div
             className="z-20 h-full relative rounded-2xl bg-white/60 dark:bg-black/30 backdrop-blur-lg border border-white/25 dark:border-black/30 overflow-hidden"
@@ -140,30 +151,84 @@ const MockSection = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6">
-            {qualities.map((q) => {
-              const Ico = q.icon;
-              return (
-                <div
-                  key={q.title}
-                  className="relative bg-azul-terciario border border-white/20 dark:border-white/30 p-5 text-white"
-                >
-                  <CustomIcon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black opacity-55" />
-                  <CustomIcon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black opacity-55" />
-                  <CustomIcon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black opacity-55" />
-                  <CustomIcon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black opacity-55" />
-                   <div className="flex items-start gap-3">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-azul-primario">
-                      <Ico size={18} />
-                    </span>
-                     <div>
-                      <h4 className="text-base md:text-lg font-semibold text-white">{q.title}</h4>
-                      <p className="text-sm text-white/85 mt-1">{q.description}</p>
-                     </div>
-                   </div>
-                 </div>
-              );
-            })}
+          <div className="w-full">
+            <div className="block lg:hidden">
+              <Carousel
+                setApi={setCarouselApi}
+                plugins={[
+                  Autoplay({
+                    delay: 3500,
+                    stopOnInteraction: false,
+                  }),
+                ]}
+                className="mx-auto"
+              >
+                <CarouselContent>
+                  {qualities.map((q) => {
+                    const Ico = q.icon;
+                    return (
+                      <CarouselItem key={q.title}>
+                        <div className="relative bg-azul-terciario border border-white/20 dark:border-white/30 p-5 text-white rounded">
+                          <CustomIcon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black opacity-55" />
+                          <CustomIcon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black opacity-55" />
+                          <CustomIcon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black opacity-55" />
+                          <CustomIcon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black opacity-55" />
+                          <div className="flex items-start gap-3">
+                            <span className="inline-flex items-center justify-center h-10 w-15 rounded-full bg-gray-200 text-azul-primario">
+                              <Ico size={18} />
+                            </span>
+                            <div>
+                              <h4 className="text-base md:text-lg font-semibold text-white">{q.title}</h4>
+                              <p className="text-sm text-white/85 mt-1">{q.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+              </Carousel>
+              <div className="flex justify-center gap-3 mt-4">
+                {qualities.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    aria-label={`Ir para qualidade ${idx + 1}`}
+                    className={`w-2 h-2 rounded-full transition-all border-2 ${
+                      selectedIndex === idx
+                        ? "bg-azul-primario border-azul-primario"
+                        : "bg-white"
+                    }`}
+                    onClick={() => carouselApi && carouselApi.scrollTo(idx)}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="hidden lg:flex flex-col gap-6">
+              {qualities.map((q) => {
+                const Ico = q.icon;
+                return (
+                  <div
+                    key={q.title}
+                    className="relative bg-azul-terciario border border-white/20 dark:border-white/30 p-5 text-white rounded"
+                  >
+                    <CustomIcon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black opacity-55" />
+                    <CustomIcon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black opacity-55" />
+                    <CustomIcon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black opacity-55" />
+                    <CustomIcon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black opacity-55" />
+                    <div className="flex items-start gap-3">
+                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-azul-primario">
+                        <Ico size={18} />
+                      </span>
+                      <div>
+                        <h4 className="text-base md:text-lg font-semibold text-white">{q.title}</h4>
+                        <p className="text-sm text-white/85 mt-1">{q.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

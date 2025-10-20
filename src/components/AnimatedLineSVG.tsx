@@ -10,7 +10,7 @@ const AnimatedLineSVG = ({ targetRef }: { targetRef: React.RefObject<HTMLElement
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div className="absolute w-full left-0 top-0 pointer-events-none z-0">
+    <div className="absolute w-full left-0 top-0 pointer-events-none z-0 opacity-0 lg:opacity-100">
       <svg
         width="1440"
         height="2200"

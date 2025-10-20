@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 /* eslint-disable react-hooks/exhaustive-deps */
+
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -149,7 +149,6 @@ const CardItemInner = <T extends React.ElementType = "div">(
     }
   };
 
-  // Use both refs for compatibility
   const setRef = (node: HTMLElement | null) => {
     innerRef.current = node;
     if (typeof ref === "function") {

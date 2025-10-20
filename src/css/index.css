@@ -7,6 +7,7 @@
 
 @import './pagescss/_landingpage.css';
 @import './pagescss/_loginpage.css';
+@import './pagescss/_globalpages.css';
 
 @import './layoutscss/_defaultlayout.css';
 

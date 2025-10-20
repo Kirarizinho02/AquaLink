@@ -97,7 +97,7 @@ const CTASection = () => {
             transition={{ duration: 0.3, delay: 0.18 }}
           >
             <CardContainer
-              containerClassName="absolute top-[24.5%] left-[16%] sm:left-[18%] md:left-[22%] w-[220px] sm:w-[250px] py-0 items-start justify-start pointer-events-auto"
+              containerClassName="absolute top-[26.5%] left-[16%] sm:left-[18%] md:left-[22%] w-[220px] sm:w-[250px] py-0 items-start justify-start pointer-events-auto"
               className="w-full"
             >
               <CardBody className="w-full h-auto">
@@ -108,8 +108,8 @@ const CTASection = () => {
                         <img src={aqualinkLogo} alt="AquaLink" className="w-5 h-5" />
                       </span>
                       <div>
-                        <p className="text-sm font-semibold text-foreground">Lembre-se de tomar água 💧</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">Hora do próximo gole!</p>
+                        <p className="text-sm font-semibold text-foreground">Lembre-se de tomar água! </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">Hora do próximo gole.</p>
                       </div>
                     </div>
                   </div>
@@ -136,7 +136,7 @@ const CTASection = () => {
                         <img src={aqualinkLogo} alt="AquaLink" className="w-5 h-5" />
                       </span>
                       <div>
-                        <p className="text-sm font-semibold text-foreground">Apenas 200 ml! ✅</p>
+                        <p className="text-sm font-semibold text-foreground">Apenas 200 ml!</p>
                         <p className="text-xs text-muted-foreground mt-0.5">Você está a 200 ml de bater sua meta.</p>
                       </div>
                     </div>

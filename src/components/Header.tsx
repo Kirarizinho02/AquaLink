@@ -161,7 +161,7 @@ const Header = () => {
                         className="text-muted-foreground/80"
                         aria-hidden="true"
                       />
-                      <span>{link.label}</span>
+                      <span className="text-black/90 dark:text-white/90 font-medium">{link.label}</span>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 );

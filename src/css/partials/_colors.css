@@ -5,6 +5,7 @@
   --color-absolute-black: #000000;
   --color-white: #f9f9f9;
   --color-black: #0c0c0c;
+  --color-cinza: #2c2c2c;
 
   --color-azul-preto: oklch(0.2953 0.1095 261.18);
   --color-azul-escuro: #171C2B;
@@ -26,6 +27,7 @@
   --color-primary: #0c0c0c;
   --color-white: #f9f9f9;
   --color-black: #0c0c0c;
+  --color-cinza: #2c2c2c;
 
   --color-azul-preto: oklch(0.1953 0.1095 261.18);
 
