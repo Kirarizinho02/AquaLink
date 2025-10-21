@@ -4,7 +4,7 @@ import {
 } from "react-router";
 
 // Importação das páginas 
-import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives } from "./pages";
+import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions } from "./pages";
 
 // Importação dos layouts
 import { DefaultLayout } from "./layouts";
@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/informatives",
         Component: Informatives,
+      },
+      {
+        path: "/faq",
+        Component: FrequentlyAskedQuestions,
       }
     ],
   },

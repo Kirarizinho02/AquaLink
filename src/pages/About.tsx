@@ -75,6 +75,7 @@ function TitleSection() {
 function MissionSection() {
   const [showTip, setShowTip] = useState(false);
   const TIP_KEY = "aqualink:tip:lembretes-inteligentes:seen";
+  const imgBoxRef = useRef<HTMLDivElement>(null); // container da imagem/pills
 
   useEffect(() => {
     try {
@@ -94,7 +95,7 @@ function MissionSection() {
   return (
     <section className="container mx-auto max-w-7xl px-6 py-14">
       <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-2">
-        <div className="relative w-full flex justify-center">
+        <div ref={imgBoxRef} className="relative w-full flex justify-center">
           <img
             src={bottle_png_tilted}
             alt="AquaLink splash"
@@ -114,7 +115,13 @@ function MissionSection() {
                 />
               </div>
             </TooltipTrigger>
-            <TooltipContent side="top" className="bg-azul-primario text-white">
+            <TooltipContent
+              side="top"
+              align="center"
+              sideOffset={8}
+              container={imgBoxRef.current as HTMLDivElement | null}
+              className="bg-azul-primario text-white"
+            >
               mova-me!
             </TooltipContent>
           </Tooltip>
@@ -295,14 +302,14 @@ function ValuesSection() {
           <SectionBadge text="Valores" />
           <Carousel
             setApi={setApi}
-            className="w-full mt-4"            // evita vazar conteúdo
-            opts={{ containScroll: "trimSnaps", align: "start" }} // mantém dentro do viewport
+            className="w-full mt-4"
+            opts={{ containScroll: "trimSnaps", align: "start" }}
           >
             <CarouselContent>
               {slides.map((s) => (
                 <CarouselItem key={s.key}>
                   <div className="rounded-2xl border border-white/15 bg-white/60 dark:bg-black/35 backdrop-blur-md shadow-xl p-6 md:p-7 text-foreground min-h-[360px]">
-                    <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+                    <h3 className="text-3xl md:text-4xl font-bold text-foreground">
                       {s.title}
                     </h3>
                     {s.paras.map((p, i) => (

@@ -29,7 +29,7 @@ import { LucideLayoutDashboard, LucideLogOut, LucideUser } from "lucide-react";
 const navigationLinks = [
   { href: "/", label: "Home", icon: IoWaterOutline },
   { href: "/about", label: "Sobre", icon: AiOutlineTeam },
-  { href: "#", label: "Informativos", icon: FaInfo },
+  { href: "/informatives", label: "Informativos", icon: FaInfo },
 ];
 
 const Header = () => {
