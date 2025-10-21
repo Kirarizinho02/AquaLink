@@ -10,6 +10,9 @@ import water_bar from '@/assets/water_bar_demo.riv';
 import aqualink_classic from '@/assets/aqualink-classic.png';
 import noise from '@/assets/noise.png';
 import mock_horizontal from '@/assets/mock-horizontal.png';
+import aqualink_mock_splash from '@/assets/aqualink-mock-splash.png';
+import bottle_png_tilted from '@/assets/bottle-png-tilted.png';
+import logo_outline_aqualink from '@/assets/logo-outline-aqualink.svg';
 
 
 export { 
@@ -24,5 +27,8 @@ export {
   aqualink_writing_2,
   water_bar,
   aqualink_classic,
-  mock_horizontal
+  mock_horizontal,
+  aqualink_mock_splash,
+  bottle_png_tilted,  
+  logo_outline_aqualink
 };
