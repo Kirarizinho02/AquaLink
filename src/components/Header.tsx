@@ -98,7 +98,7 @@ const Header = () => {
             </PopoverTrigger>
             <PopoverContent align="start" className="w-36 p-1 md:hidden">
               <NavigationMenu className="max-w-none *:w-full ">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
+                <NavigationMenuList className="flex-col items-start gap-2 md:gap-2">
                   {navigationLinks.map((link, index) => {
                     const Icon = link.icon;
                     const isActive = location.pathname === link.href;
@@ -107,7 +107,7 @@ const Header = () => {
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           active={isActive}
-                          className="flex-row items-center gap-2 py-1.5"
+                          className="flex-row items-center gap-2 py-1.5 cursor-pointer"
                           onClick={() => {
                             navigate(link.href);
                             setOpen(false);
@@ -144,12 +144,11 @@ const Header = () => {
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => {
                 const Icon = link.icon;
-                const isActive = location.pathname === link.href; // Verifica se o link é o ativo
-
+                const isActive = location.pathname === link.href; 
                 return (
                   <NavigationMenuItem key={index} className="w-full">
                     <NavigationMenuLink
-                      className="flex-row items-center gap-2 py-1.5"
+                      className="flex-row items-center gap-2 py-1.5 cursor-pointer"
                       active={isActive}
                       onClick={() => {
                         navigate(link.href);
@@ -172,8 +171,8 @@ const Header = () => {
         </div>
 
         {/* Coluna central: Logo */}
-        <div className="flex items-center">
-          <a href="#" className="">
+        <div className="flex items-center cursor-pointer">
+          <a onClick={() => { navigate("/") }}>
             <img
               src={logo_no_writing_aqualink_primary}
               alt="AquaLink Logo"

@@ -83,8 +83,8 @@ const FeatureCard = ({ feature }: { feature: FeatureItem }) => {
     >
       <div
         className={cn(
-          'relative px-4 pt-4 pb-4 text-sm ring-border ring',
-          'bg-white/60 dark:bg-black/30 backdrop-blur-[5px] border border-white/30 dark:border-black/30 shadow-sm',
+          'relative px-4 pt-4 pb-4 text-sm ring-border ring z-20',
+          'border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/35 backdrop-blur-md shadow-sm',
           feature.cornerStyle
         )}
       >

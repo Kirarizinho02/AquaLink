@@ -28,6 +28,7 @@
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
     "@rive-app/react-canvas": "^4.23.3",
+    "@splinetool/react-spline": "^4.1.0",
     "@tailwindcss/vite": "^4.1.12",
     "@testing-library/jest-dom": "^6.8.0",
     "class-variance-authority": "^0.7.1",
