@@ -42,7 +42,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/time"
+                  to="/team"
                   className="hover:underline text-black/80 dark:text-white/70"
                 >
                   Time

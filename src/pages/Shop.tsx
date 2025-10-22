@@ -1,6 +1,9 @@
 import { EasyHydrationSection, HeroShop, MarqueeSection, ProductsSection } from "@/components";
+import { usePageTitle } from "@/hooks";
 
 const Shop = () => {
+    usePageTitle("Loja | AquaLink");
+
   return (
     <>
       <HeroShop />

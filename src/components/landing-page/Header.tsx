@@ -43,7 +43,7 @@ const Header = () => {
 
   const handleDashboard = () => {
     setOpen(false);
-    navigate("/dashboard");
+    navigate("/dashboard/overview");
   };
 
   const handleProfile = () => {

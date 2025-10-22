@@ -4,7 +4,7 @@ import {
 } from "react-router";
 
 // Importação das páginas 
-import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions, Shop, AqualinkClassicPage } from "./pages";
+import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions, Shop, AqualinkClassicPage, Team } from "./pages";
 
 // Importação dos layouts
 import { DefaultLayout, ShopLayout } from "./layouts";
@@ -31,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/faq",
         Component: FrequentlyAskedQuestions,
+      },
+      {
+        path: "/team",
+        Component: Team,
       }
     ],
   },
@@ -57,7 +61,7 @@ export const router = createBrowserRouter([
     Component: RegisterPage,
   },
   {
-    path: "/dashboard",
+    path: "/dashboard/overview",
     Component: () => (
       <ProtectedRoute>
         <Dashboard />

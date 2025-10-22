@@ -22,6 +22,10 @@ import aqualink_169_man from '@/assets/aqualink-169-man.png';
 import aqualink_169_marble from '@/assets/aqualink-169-marble.png';
 import aqualink_169_table from '@/assets/aqualink-169-table.png';
 import aqualink_daily from '@/assets/aqualink-daily.jpg';
+import aqualink_buried_sand from '@/assets/aqualink-buried-sand.png';
+import drinking_water from '@/assets/drinking-water.jpg';
+import aqualink_team from '@/assets/aqualink-team.png';
+import aqualink_team_wide from '@/assets/aqualink-team-wide.png';
 
 
 export { 
@@ -48,5 +52,9 @@ export {
   aqualink_169_man,
   aqualink_169_marble,
   aqualink_169_table,
-  aqualink_daily
+  aqualink_daily,
+  aqualink_buried_sand,
+  drinking_water,
+  aqualink_team,
+  aqualink_team_wide
 };

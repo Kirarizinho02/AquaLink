@@ -314,7 +314,7 @@ const RegisterPage = ({ className }: MultiStepFormProps) => {
           gender: updatedData.gender,
         });
         // redireciona assim que possível
-        navigation("/dashboard", { replace: true });
+        navigation("/dashboard/overview", { replace: true });
         return;
       } catch (error: any) {
         setAlert({

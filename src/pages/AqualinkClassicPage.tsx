@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Carousel,
@@ -27,6 +29,11 @@ import {
   useSearchParams,
   Link,
 } from "react-router-dom";
+import { usePageTitle } from "@/hooks";
+import { auth, firestore } from "@/config/firebase";
+import { addDoc, collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { toast } from "sonner";
 
 // Adicione a máscara de telefone
 function formatPhone(value: string) {
@@ -45,11 +52,14 @@ function formatPhone(value: string) {
 type ColorOption = "azul-primario" | "garrafa-verde";
 
 const AqualinkClassicPage = () => {
+  usePageTitle("AquaLink Classic | AquaLink");
+
   const [searchParams] = useSearchParams();
   const [glow, setGlow] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [color, setColor] = useState<ColorOption>("azul-primario");
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -97,11 +107,43 @@ const AqualinkClassicPage = () => {
     };
   }, [searchParams, navigate, location.pathname]);
 
-  const submitInterest = (e: React.FormEvent) => {
+  const submitInterest = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: enviar nome e telefone para lista de espera
-    console.log("interesse:", name, "telefone:", phone, "cor:", color);
+    const user = auth.currentUser;
+    const emailOk = /\S+@\S+\.\S+/.test(email);
+    const phoneOk = phone.replace(/\D/g, "").length >= 10;
+    if (!emailOk || !phoneOk) {
+      toast.error("Preencha e-mail e telefone válidos.");
+      return;
+    }
+    try {
+      if (user) {
+        await setDoc(doc(firestore, "users", user.uid), { interessado: true }, { merge: true });
+        toast.success("Interesse registrado na sua conta.");
+      } else {
+        await addDoc(collection(firestore, "interessados"), {
+          email,
+          telefone: phone,
+          timestamp: serverTimestamp(),
+        });
+        toast.success("Inscrição na lista de espera enviada!");
+      }
+      setEmail(user?.email ?? "");
+      setName("");
+      setPhone("");
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err?.message || "Não foi possível enviar seus dados.");
+    }
   };
+
+  // Autocompleta o e-mail se o usuário estiver logado
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (u?.email) setEmail(u.email);
+    });
+    return unsub;
+  }, []);
 
   const colorLabel = color === "garrafa-verde" ? "Verde" : "Azul";
 
@@ -305,6 +347,16 @@ const AqualinkClassicPage = () => {
               onSubmit={submitInterest}
               className="flex flex-col gap-2 sm:flex-row sm:items-center"
             >
+              <Input
+                type="email"
+                required
+                placeholder="Seu E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                autoComplete="email"
+                className="h-10"
+              />
               <Input
                 type="text"
                 required

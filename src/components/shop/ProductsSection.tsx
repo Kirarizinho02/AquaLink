@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { aqualink_standing } from "@/assets";
+import { bottle_png_tilted } from "@/assets";
 import { cn } from "@/lib/utils";
 import { GradientText } from "@/components/ui/gradient-text";
 
@@ -16,7 +16,7 @@ const products: Product[] = [
   {
     title: "AquaLink Classic",
     price: "R$ —",
-    image: aqualink_standing,
+    image: bottle_png_tilted,
     href: "/shop/aqualink-classic",
     available: true,
     subtitle: "Dia-a-Dia",
@@ -30,16 +30,16 @@ function CardVisual({ p }: { p: Product }) {
   return (
     <div
       className={cn(
-        "group relative flex h-full w-full overflow-hidden rounded-2xl border p-3",
+        "group relative flex h-full w-full overflow-hidden rounded-2xl border p-2 sm:p-3",
         "border-white/15 bg-white/60 dark:bg-black/35 backdrop-blur-md shadow-sm"
       )}
     >
-      <div className="aspect-[4/5] w-full overflow-hidden rounded-xl grid place-items-center bg-background">
+      <div className="w-full overflow-hidden rounded-xl grid place-items-center bg-background aspect-[3/4] sm:aspect-[4/5]">
         {p.available && p.image ? (
           <img
             src={p.image}
             alt={p.title}
-            className="max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-[1.06]"
+            className="block max-h-[90%] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
             loading="lazy"
           />
         ) : (
@@ -58,22 +58,27 @@ function CardVisual({ p }: { p: Product }) {
 
 function ProductItem({ p }: { p: Product }) {
   const content = (
-    <>
+    <div className="flex h-full min-w-0 flex-col">
       <CardVisual p={p} />
-      <div className="mt-3">
-        <h3 className="text-sm md:text-base font-medium text-foreground text-left">{p.title}</h3>
-        <p className="text-xs md:text-sm text-muted-foreground text-left mt-1">
+      <div className="mt-3 space-y-1.5">
+        <h3 className="text-sm md:text-base font-medium text-foreground">{p.title}</h3>
+        <p className="text-xs md:text-sm text-muted-foreground">
           {p.subtitle ?? "Dia-a-Dia"}
         </p>
-        <p className={cn("text-sm md:text-base text-left mt-1", p.available ? "text-foreground" : "text-muted-foreground")}>
+        <p
+          className={cn(
+            "text-sm md:text-base",
+            p.available ? "text-foreground" : "text-muted-foreground"
+          )}
+        >
           {p.price}
         </p>
       </div>
-    </>
+    </div>
   );
 
   return p.available && p.href ? (
-    <Link to={p.href} aria-label={`Ver ${p.title}`} className="block h-full">
+    <Link to={p.href} aria-label={`Ver ${p.title}`} className="flex h-full flex-col">
       {content}
     </Link>
   ) : (
@@ -84,7 +89,7 @@ function ProductItem({ p }: { p: Product }) {
 const ProductsSection = () => {
   return (
     <section className="w-full">
-      <div className="container mx-auto max-w-7xl px-6 py-6 mb-18">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-10 mb-16">
         <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
           Nossos <GradientText>produtos</GradientText>
         </h2>

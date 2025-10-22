@@ -3,9 +3,6 @@
 import * as React from "react"
 import {
   BookOpen,
-  Frame,
-  Map,
-  PieChart,
   Settings2,
   Droplets,
 } from "lucide-react"
@@ -24,22 +21,18 @@ import { LogoTitle } from "./ui/logo-title"
 const data = {
   navMain: [
     {
-      title: "Visão Geral",
+      title: "Dashboard",
       url: "#",
       icon: Droplets,
       isActive: true,
       items: [
         {
-          title: "Relatório de Hidratação",
-          url: "#",
+          title: "Visão Geral",
+          url: "/overview",
         },
         {
           title: "Informativos",
-          url: "#",
-        },
-        {
-          title: "Últimas Atividades",
-          url: "#",
+          url: "/informatives",
         },
       ],
     },
@@ -48,14 +41,6 @@ const data = {
       url: "#",
       icon: BookOpen,
       items: [
-        {
-          title: "Introdução",
-          url: "#",
-        },
-        {
-          title: "Tutoriais",
-          url: "#",
-        },
         {
           title: "Changelog",
           url: "#",
@@ -75,28 +60,7 @@ const data = {
           title: "Billing",
           url: "#",
         },
-        {
-          title: "Limits",
-          url: "#",
-        },
       ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 }

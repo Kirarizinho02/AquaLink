@@ -1,19 +1,69 @@
-import { useRef, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { motion, useInView } from "motion/react";
 import { mock_horizontal } from "@/assets";
 import aqualinkLogo from "@/assets/logo-no-writing-aqualink-primary.svg";
 import { CardContainer, CardBody, CardItem } from "../ui/3d-card";
+import { auth, firestore } from "@/config/firebase";
+import { addDoc, collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { toast } from "sonner";
+
+// Máscara simples para telefone brasileiro
+function formatPhone(value: string) {
+  const digits = value.replace(/\D/g, "");
+  if (digits.length <= 10) {
+    return digits.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3").replace(/-$/, "");
+  }
+  return digits.replace(/^(\d{2})(\d{5})(\d{0,4})$/, "($1) $2-$3").replace(/-$/, "");
+}
 
 const CTASection = () => {
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { amount: 0.35, once: true }); 
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Autocompleta o e-mail se o usuário estiver logado
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (u?.email) setEmail(u.email);
+    });
+    return unsub;
+  }, []);
 
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const user = auth.currentUser;
+    const emailOk = /\S+@\S+\.\S+/.test(email);
+    const phoneOk = phone.replace(/\D/g, "").length >= 10;
+
+    if (!emailOk || !phoneOk) {
+      toast.error("Preencha e-mail e telefone válidos.");
+      return;
+    }
+
+    try {
+      if (user) {
+        await setDoc(doc(firestore, "users", user.uid), { interessado: true }, { merge: true });
+        toast.success("Interesse registrado na sua conta.");
+      } else {
+        await addDoc(collection(firestore, "interessados"), {
+          email,
+          telefone: phone,
+          timestamp: serverTimestamp(),
+        });
+        toast.success("Inscrição na lista de espera enviada!");
+      }
+      setEmail(user?.email ?? "");
+      setPhone("");
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err?.message || "Não foi possível enviar seus dados.");
+    }
   };
 
   return (
@@ -32,7 +82,7 @@ const CTASection = () => {
             Sua saúde e bem-estar merecem o melhor.
           </p>
 
-          <form onSubmit={onSubmit} className="mt-6 flex flex-col sm:flex-row gap-3">
+          <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3">
             <label htmlFor="cta-email" className="sr-only">E-mail</label>
             <Input
               id="cta-email"
@@ -41,9 +91,22 @@ const CTASection = () => {
               placeholder="Digite seu e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              autoComplete="email"
               className="w-full sm:max-w-sm"
             />
-            <Button type="submit" className="shrink-0 bg-verde-accent/100 hover:bg-verde-accent/90 text-white transition-all duration-300">
+            <label htmlFor="cta-phone" className="sr-only">Telefone</label>
+            <Input
+              id="cta-phone"
+              type="tel"
+              required
+              placeholder="(99) 99999-9999"
+              value={phone}
+              onChange={(e) => setPhone(formatPhone(e.target.value))}
+              maxLength={15}
+              className="w-full sm:max-w-sm"
+            />
+            <Button type="submit" className="shrink-0 bg-verde-accent/100 hover:bg-verde-accent/90 text-white transition-all duration-300 cursor-pointer">
               Inscrever-se
             </Button>
           </form>

@@ -74,7 +74,7 @@ const EasyHydrationSection = () => {
                   const Icon = it.icon;
                   return (
                     <li key={it.title} className="flex items-start gap-2 text-sm">
-                      <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/40 dark:bg-white/10">
+                      <span className="mt-1 inline-flex h-6 w-12 md:h-6 md:w-6 items-center justify-center rounded-full border border-white/20 bg-white/40 dark:bg-white/10">
                         <Icon size={14} />
                       </span>
                       <div className="text-foreground/90">

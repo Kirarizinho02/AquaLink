@@ -8,3 +8,5 @@ export * from './ProfilePage';
 export * from './FrequentlyAskedQuestions';
 export * from './Shop';
 export * from './AqualinkClassicPage';
+export * from './Team';
+export * from './Changelog';

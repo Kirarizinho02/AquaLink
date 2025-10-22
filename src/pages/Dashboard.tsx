@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Droplet, Bell, GlassWater, ChartArea, Plus, Paperclip } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { auth, db } from "@/config/firebase";
 import { AppSidebar } from "@/components/app-sidebar";
+import { Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -25,6 +27,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Banner,
+  BannerClose,
+  BannerIcon,
+  BannerTitle,
+} from "@/components/ui/kibo-ui/banner";
 import { ThemeSwitcher } from "@/components/ui/kibo-ui/theme-switcher";
 import { usePageTitle } from "@/hooks";
 import { format, subDays, isAfter } from "date-fns";
@@ -230,10 +238,22 @@ const Dashboard = () => {
     }
   })();
 
-  return (
+  return (    
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
+        {/* Banner beta acima do header */}
+        <Banner className="bg-muted text-foreground rounded-none">
+          <BannerIcon icon={CircleAlert} />
+          <BannerTitle>
+            O Dashboard web está em beta. A visualização dos dados é recomendada na{" "}
+            <Link to="/download" className="underline underline-offset-4 font-medium hover:text-azul-primario">
+              plataforma mobile
+            </Link>
+            .
+          </BannerTitle>
+          <BannerClose />
+        </Banner>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
@@ -244,7 +264,7 @@ const Dashboard = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                  <BreadcrumbLink href="#" className="cursor-default">Dashboard</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>

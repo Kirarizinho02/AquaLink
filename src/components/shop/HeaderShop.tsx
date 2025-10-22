@@ -57,7 +57,7 @@ const HeaderShop = () => {
 
   const handleDashboard = () => {
     setOpen(false);
-    navigate("/dashboard");
+    navigate("/dashboard/overview");
   };
 
   const handleProfile = () => {

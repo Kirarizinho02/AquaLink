@@ -17,6 +17,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { usePageTitle } from "@/hooks";
 
 function GlassInfoPill({
   title,
@@ -308,6 +309,7 @@ function ValuesSection() {
 }
 
 const About = () => {
+  usePageTitle("Sobre | AquaLink");
   const aboutRef = useRef<HTMLDivElement>(null);
   return (
     <div ref={aboutRef} className="relative w-full">

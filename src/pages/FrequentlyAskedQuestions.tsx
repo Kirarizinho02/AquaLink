@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { usePageTitle } from "@/hooks";
 
 type FaqCategory = "geral" | "garrafa" | "aplicativo";
 
@@ -121,6 +122,8 @@ const FILTERS: { key: FaqCategory; label: string }[] = [
 ];
 
 const FrequentlyAskedQuestions = () => {
+  usePageTitle("FAQs | AquaLink");
+
   const [active, setActive] = useState<FaqCategory>("geral");
 
   const filtered = useMemo(
