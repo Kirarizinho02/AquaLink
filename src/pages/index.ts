@@ -6,3 +6,5 @@ export * from './LoginPage';
 export * from './RegisterPage';
 export * from './ProfilePage';
 export * from './FrequentlyAskedQuestions';
+export * from './Shop';
+export * from './AqualinkClassicPage';

@@ -1,5 +1,3 @@
-/* eslint-disable no-empty */
-
 import { useRef, useEffect, useState } from "react";
 import { GradientText } from "@/components/ui/gradient-text";
 import {
@@ -11,11 +9,6 @@ import {
   DraggableCardBody,
   DraggableCardContainer,
 } from "@/components/ui/draggable-card";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
 import {
   Carousel,
   CarouselContent,
@@ -73,24 +66,7 @@ function TitleSection() {
 }
 
 function MissionSection() {
-  const [showTip, setShowTip] = useState(false);
-  const TIP_KEY = "aqualink:tip:lembretes-inteligentes:seen";
   const imgBoxRef = useRef<HTMLDivElement>(null); // container da imagem/pills
-
-  useEffect(() => {
-    try {
-      const seen = localStorage.getItem(TIP_KEY);
-      if (!seen) setShowTip(true);
-    } catch {}
-  }, []);
-
-  const dismissTip = () => {
-    if (!showTip) return;
-    setShowTip(false);
-    try {
-      localStorage.setItem(TIP_KEY, "1");
-    } catch {}
-  };
 
   return (
     <section className="container mx-auto max-w-7xl px-6 py-14">
@@ -102,29 +78,10 @@ function MissionSection() {
             className="relative z-0 w-full max-w-[440px] drop-shadow-xl rounded-xl"
             loading="lazy"
           />
-          <Tooltip open={showTip}>
-            <TooltipTrigger asChild>
-              <div
-                onPointerDown={dismissTip}
-                onTouchStart={dismissTip}
-                onClick={dismissTip}
-              >
-                <GlassInfoPill
-                  title="Lembretes inteligentes"
-                  className="absolute -top-4 left-2 sm:left-90"
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              align="center"
-              sideOffset={8}
-              container={imgBoxRef.current as HTMLDivElement | null}
-              className="bg-azul-primario text-white"
-            >
-              mova-me!
-            </TooltipContent>
-          </Tooltip>
+          <GlassInfoPill
+            title="Lembretes inteligentes"
+            className="absolute -top-4 left-2 sm:left-90"
+          />
 
           <GlassInfoPill
             title="Metas personalizadas"

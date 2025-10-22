@@ -4,10 +4,10 @@ import {
 } from "react-router";
 
 // Importação das páginas 
-import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions } from "./pages";
+import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions, Shop, AqualinkClassicPage } from "./pages";
 
 // Importação dos layouts
-import { DefaultLayout } from "./layouts";
+import { DefaultLayout, ShopLayout } from "./layouts";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -32,6 +32,20 @@ export const router = createBrowserRouter([
         path: "/faq",
         Component: FrequentlyAskedQuestions,
       }
+    ],
+  },
+  {
+    path: "/shop",
+    Component: ShopLayout,
+    children: [
+      {
+        path: "/shop",
+        Component: Shop,
+      },
+      {
+        path: "/shop/aqualink-classic",
+        Component: AqualinkClassicPage,
+      },
     ],
   },
   {

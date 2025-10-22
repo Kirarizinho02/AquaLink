@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { ref, set } from "firebase/database";
-import { db, auth } from "@/config/firebase";
+import { auth, firestore } from "@/config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -27,15 +27,17 @@ interface AuthContextType {
   loginWithGithub: (remember: boolean) => Promise<UserCredential>;
   user: User | null;
   logout: () => Promise<void>;
-    register: (
+  register: (
     data: {
       email: string;
       password: string;
       firstName: string;
       lastName: string;
       height: string;
-      date: string;
+      weight: string;         
+      birthdate: string;      
       gender: string;
+      connectedBottle?: string;
     }
   ) => Promise<void>;
 }
@@ -79,39 +81,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return signInWithPopup(auth, provider);
   };
 
-const register = async (data: {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  height: string;
-  date: string;
-  gender: string;
-  connectedBottle?: string;
-}) => {
-  // Cria usuário autenticado
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    data.email,
-    data.password
-  );
-  // Atualiza o nome do usuário no perfil do Auth
-  await updateProfile(userCredential.user, {
-    displayName: `${data.firstName} ${data.lastName}`,
-  });
-  // Salva dados no Realtime Database
-  await set(ref(db, `users/${userCredential.user.uid}`), {
-    uid: userCredential.user.uid,
-    email: data.email,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    height: data.height,
-    date: data.date,
-    gender: data.gender,
-    connectedBottle: data.connectedBottle || null,
-    createdAt: new Date().toISOString(),
-  });
-};
+  const register = async (data: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    height: string;
+    weight: string;
+    birthdate: string;
+    gender: string;
+    connectedBottle?: string;
+  }) => {
+    // Cria usuário no Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+    await updateProfile(userCredential.user, {
+      displayName: `${data.firstName} ${data.lastName}`,
+    });
+    
+    const payload = {
+      birthdate: data.birthdate,
+      connectedBottle: data.connectedBottle ?? null,
+      email: data.email,
+      gender: data.gender,
+      height: data.height,
+      name: data.firstName,
+      weight: data.weight,
+      lastName: data.lastName,                    
+    };
+
+    await setDoc(doc(firestore, "users", userCredential.user.uid), payload);
+  };
 
   const logout = () => auth.signOut();
 

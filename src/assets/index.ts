@@ -13,6 +13,15 @@ import mock_horizontal from '@/assets/mock-horizontal.png';
 import aqualink_mock_splash from '@/assets/aqualink-mock-splash.png';
 import bottle_png_tilted from '@/assets/bottle-png-tilted.png';
 import logo_outline_aqualink from '@/assets/logo-outline-aqualink.svg';
+import aqualink_laying_png from '@/assets/aqualink-laying-png.png';
+import aqualink_standing from '@/assets/aqualink-standing.png';
+import aqualink_standing_open from '@/assets/aqualink-standing-open-png.png';
+import aqualink_standing_green from '@/assets/aqualink-standing-green.png';
+import aqualink_pro_shot from '@/assets/aqualink-pro-shot.png';
+import aqualink_169_man from '@/assets/aqualink-169-man.png';
+import aqualink_169_marble from '@/assets/aqualink-169-marble.png';
+import aqualink_169_table from '@/assets/aqualink-169-table.png';
+import aqualink_daily from '@/assets/aqualink-daily.jpg';
 
 
 export { 
@@ -29,6 +38,15 @@ export {
   aqualink_classic,
   mock_horizontal,
   aqualink_mock_splash,
-  bottle_png_tilted,  
-  logo_outline_aqualink
+  bottle_png_tilted,
+  logo_outline_aqualink,
+  aqualink_standing,
+  aqualink_laying_png,
+  aqualink_standing_open,
+  aqualink_standing_green,
+  aqualink_pro_shot,
+  aqualink_169_man,
+  aqualink_169_marble,
+  aqualink_169_table,
+  aqualink_daily
 };
