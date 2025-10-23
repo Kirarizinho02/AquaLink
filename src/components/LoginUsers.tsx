@@ -95,7 +95,7 @@ const LoginUsers = () => {
         type: "success",
         message: "Login com GitHub realizado com sucesso!",
       });
-      setTimeout(() => navigation("/dashboard"), 1200);
+      setTimeout(() => navigation("/dashboard/overview"), 1200);
     } catch (error: any) {
       let details: string[] = [];
       if (error.code === "auth/popup-closed-by-user") {

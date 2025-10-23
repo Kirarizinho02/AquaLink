@@ -10,3 +10,6 @@ export * from './Shop';
 export * from './AqualinkClassicPage';
 export * from './Team';
 export * from './Changelog';
+export * from './Download';
+export * from './PrivacyPolicy';
+export * from './ContactUs';

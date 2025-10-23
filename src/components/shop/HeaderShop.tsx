@@ -62,7 +62,7 @@ const HeaderShop = () => {
 
   const handleProfile = () => {
     setOpen(false);
-    navigate("/profile");
+    navigate("/dashboard/profile");
   };
 
   const handleLogout = async () => {

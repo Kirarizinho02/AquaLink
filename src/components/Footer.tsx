@@ -58,7 +58,7 @@ const Footer = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="/contato"
+                  to="/contact"
                   className="hover:underline text-black/80 dark:text-white/70"
                 >
                   Contate-nos
@@ -82,7 +82,7 @@ const Footer = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="/privacidade"
+                  to="/privacypolicy"
                   className="hover:underline text-black/80 dark:text-white/70"
                 >
                   Política de Privacidade

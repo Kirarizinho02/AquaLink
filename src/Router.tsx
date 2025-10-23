@@ -4,10 +4,10 @@ import {
 } from "react-router";
 
 // Importação das páginas 
-import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions, Shop, AqualinkClassicPage, Team } from "./pages";
+import { LandingPage, LoginPage, Dashboard, RegisterPage, ProfilePage, About, Informatives, FrequentlyAskedQuestions, Shop, AqualinkClassicPage, Team, Changelog, Download, PrivacyPolicy, ContactUs } from "./pages";
 
 // Importação dos layouts
-import { DefaultLayout, ShopLayout } from "./layouts";
+import { DashboardLayout, DefaultLayout, ShopLayout } from "./layouts";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -35,6 +35,18 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         Component: Team,
+      },
+      {
+        path: "/contact",
+        Component: ContactUs,
+      },
+      {
+        path: "/download",
+        Component: Download,
+      },
+      {
+        path: "/privacypolicy",
+        Component: PrivacyPolicy,
       }
     ],
   },
@@ -52,28 +64,19 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  { path: "/login", Component: LoginPage },
+  { path: "/register", Component: RegisterPage },
   {
-    path: "/login",
-    Component: LoginPage,
-  },
-  {
-    path: "/register",
-    Component: RegisterPage,
-  },
-  {
-    path: "/dashboard/overview",
+    path: "/dashboard",
     Component: () => (
       <ProtectedRoute>
-        <Dashboard />
+        <DashboardLayout />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: "/profile",
-    Component: () => (
-      <ProtectedRoute>
-        <ProfilePage />
-      </ProtectedRoute>
-    ),
+    children: [
+      { path: "/dashboard/overview", Component: Dashboard },
+      { path: "/dashboard/profile", Component: ProfilePage },
+      { path: "/dashboard/changelog", Component: Changelog },
+    ],
   },
 ]);

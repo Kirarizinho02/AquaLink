@@ -21,14 +21,14 @@ import { LogoTitle } from "./ui/logo-title"
 const data = {
   navMain: [
     {
-      title: "Dashboard",
+      title: "Painel",
       url: "#",
       icon: Droplets,
       isActive: true,
       items: [
         {
           title: "Visão Geral",
-          url: "/overview",
+          url: "/dashboard/overview",
         },
         {
           title: "Informativos",
@@ -43,7 +43,7 @@ const data = {
       items: [
         {
           title: "Changelog",
-          url: "#",
+          url: "/dashboard/changelog",
         },
       ],
     },
@@ -54,7 +54,7 @@ const data = {
       items: [
         {
           title: "Perfil",
-          url: "/profile",
+          url: "/dashboard/profile",
         },
         {
           title: "Billing",
